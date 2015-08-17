@@ -12,10 +12,20 @@
 
 import Foundation
 
-enum ParseError : ErrorType {
+enum ParseError : ErrorType, CustomStringConvertible {
     case OptionMissing(Option)
     case NotThisCommand
     case NoParserMatched
+    case InnerParserFailed(ErrorType, Parser)
+    
+    var description: String {
+        switch(self) {
+        case .OptionMissing(let option):
+            return "Missing option --\(option.longName)"
+        default:
+            return "\(self)"
+        }
+    }
 }
 
 public protocol KeyValueCodeable {
@@ -47,16 +57,16 @@ public extension Parser {
             let result : ParseResult = try self.parse(choppedArguments)
             return result
         }
-        catch ParseError.OptionMissing(let opt){
-            print("Missing option --\(opt.longName)")
-            print("\(self.longHelp)")
-            return nil
+        catch ParseError.InnerParserFailed(let innerError, let parser) {
+            print("\(innerError)")
+            print(parser.longHelp)
         }
         catch {
             print("\(error)")
             print("\(self.longHelp)")
             return nil
         }
+        return nil
     }
 }
 public final class DefaultParser<T: ParseResult> {
@@ -102,5 +112,15 @@ public final class CommandParser<T: ParseResult>: Parser {
         let newArgs = [String](args[1..<args.count]) //lop off the command name
         return try self.innerParser.parse(newArgs)
     }
-    public var longHelp : String { get { return self.shortHelp} }
+    public var longHelp : String { get {
+        var usageStr = "Usage: [\(self.name)]"
+        for option in self.options {
+            usageStr += " --\(option.longName) [\(option.longName)]"
+        }
+        usageStr += "\n\n"
+        for option in self.options {
+            usageStr += "\(option.longName): \(option.shortHelp)\n"
+        }
+        return usageStr
+    } }
 }

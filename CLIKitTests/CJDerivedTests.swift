@@ -38,7 +38,7 @@ final class GitLabSetToken: Command {
     var name : String { get { return "gitLabSetToken" } }
     var parser : CLIKit.Parser {
         get {
-            let option = CLIKit.SecureOption(longName: "token", value_for_unit_testing: "mytoken")
+            let option = CLIKit.SecureOption(longName: "token", help:"no",value_for_unit_testing: "mytoken")
             return CLIKit.CommandParser<GitLabTokenResult>(name: "GitLabSetToken", options:[option], help: "whatever")
         }
     }
@@ -50,7 +50,7 @@ final class GitLabSetToken: Command {
 
 class CJDerivedTests: XCTestCase {
     func testGitLabParse() {
-        let gitLabToken = SecureOption(longName: "token", defaultValue: nil, required: true, value_for_unit_testing: "MyToken")
+        let gitLabToken = SecureOption(longName: "token", help:"no",defaultValue: nil, required: true, value_for_unit_testing: "MyToken")
         let storeTokenParser = CLIKit.CommandParser<GitLabTokenResult>(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
         let _p : GitLabTokenResult = try! storeTokenParser.parse(["storeGitLabToken","--token","mytoken"]) as! GitLabTokenResult
         XCTAssert(_p.token == "MyToken")

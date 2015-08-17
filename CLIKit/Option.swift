@@ -45,6 +45,8 @@ public protocol Option {
     var defaultValue: OptionType? { get }
     var required: Bool { get }
     var longName: String { get }
+    /**A one-line help for the option */
+    var shortHelp: String { get }
     
     func parse<T: ParseResult>(inout args: [String], inout accumulateResult: T) throws
 }
@@ -53,11 +55,13 @@ public final class DefaultOption: Option {
     public let defaultValue: OptionType?
     public let required: Bool
     public let longName: String
+    public let shortHelp: String
     
-    public init(longName: String, defaultValue: OptionType? = nil, required: Bool = false) {
+    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = false) {
         self.required = required
         self.defaultValue = defaultValue
         self.longName = longName
+        self.shortHelp = help
     }
     
     public func parse<T: ParseResult>(inout args: [String], inout accumulateResult: T) throws {
@@ -75,17 +79,19 @@ public final class SecureOption: Option {
     public let defaultValue: OptionType?
     public let required: Bool
     public let longName: String
+    public let shortHelp: String
     #if ENABLE_TESTING
     private let value_for_unit_testing: Any!
     #endif
 
-    public init(longName: String, defaultValue: OptionType? = nil, required: Bool = false, value_for_unit_testing: Any! = nil) {
+    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = false, value_for_unit_testing: Any! = nil) {
         #if ENABLE_TESTING
             self.value_for_unit_testing = value_for_unit_testing
         #endif
         self.required = required
         self.defaultValue = defaultValue
         self.longName = longName
+        self.shortHelp = help
     }
     
     public func parse<T: ParseResult>(inout args: [String], inout accumulateResult: T) throws {

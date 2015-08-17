@@ -61,7 +61,12 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
         for command in subcommands {
             if args[0] == command.name {
                 recentlyParsedCommand = command
-                return try command.parser.parse(args)
+                do {
+                    return try command.parser.parse(args)
+                }
+                catch {
+                    throw ParseError.InnerParserFailed(error, command.parser)
+                }
             }
         }
         throw ParseError.NoParserMatched
