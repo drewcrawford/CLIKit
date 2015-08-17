@@ -12,19 +12,28 @@
 
 import Foundation
 
-enum ParseError : ErrorType, CustomStringConvertible {
+enum ParseError : ErrorType {
     case OptionMissing(Option)
     case NotThisCommand
     case NoParserMatched
     case InnerParserFailed(ErrorType, Parser)
     
-    var description: String {
+    var 📡_22310636Description: String {
         switch(self) {
         case .OptionMissing(let option):
             return "Missing option --\(option.longName)"
         default:
             return "\(self)"
         }
+    }
+}
+
+extension ErrorType {
+    var 📡22310636Description: String {
+        if let e = self as? ParseError {
+            return e.📡_22310636Description
+        }
+        return "\(self)"
     }
 }
 
@@ -58,11 +67,11 @@ public extension Parser {
             return result
         }
         catch ParseError.InnerParserFailed(let innerError, let parser) {
-            print("\(innerError)")
+            print("\(innerError.📡22310636Description)")
             print("Usage: \(self.name) \(parser.longHelp)")
         }
         catch {
-            print("\(error)")
+            print("\(error.📡22310636Description)")
             print("Usage: \(self.longHelp)")
             return nil
         }
