@@ -78,7 +78,7 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
     
     public var shortHelp : String { get { return self.name } }
     public var longHelp : String { get {
-        var usageStr = "Usage: \(self.name) [command]\n\nValid commands:\n"
+        var usageStr = "\(self.name) [command]\n\nValid commands:\n"
         
         for command in subcommands {
             usageStr += "\(command.name): \(command.parser.shortHelp)\n"

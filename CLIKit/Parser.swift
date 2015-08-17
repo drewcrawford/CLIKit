@@ -59,11 +59,11 @@ public extension Parser {
         }
         catch ParseError.InnerParserFailed(let innerError, let parser) {
             print("\(innerError)")
-            print(parser.longHelp)
+            print("Usage: \(self.name) \(parser.longHelp)")
         }
         catch {
             print("\(error)")
-            print("\(self.longHelp)")
+            print("Usage: \(self.longHelp)")
             return nil
         }
         return nil
@@ -113,7 +113,7 @@ public final class CommandParser<T: ParseResult>: Parser {
         return try self.innerParser.parse(newArgs)
     }
     public var longHelp : String { get {
-        var usageStr = "Usage: [\(self.name)]"
+        var usageStr = "\(self.name)"
         for option in self.options {
             usageStr += " --\(option.longName) [\(option.longName)]"
         }
