@@ -16,3 +16,5 @@ DerivedData
 *.xcuserstate
 Carthage/Build
 Carthage/Checkouts
+
+*.xcscmblueprint # this one is new in XC7, not sure what it does
