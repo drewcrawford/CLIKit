@@ -40,4 +40,9 @@ class DontCrashWithNoArgsTests : XCTestCase {
         }
         catch { /* */ }
     }
+    
+    func testUsage() {
+        let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
+        let str = try metacommand.longHelp
+    }
 }

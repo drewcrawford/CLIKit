@@ -71,11 +71,14 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
         recentlyParsedCommand.command(parseResult)
     }
     
-    public func usage() {
-        print("Usage: ", appendNewline: false)
+    public var shortHelp : String { get { return self.name } }
+    public var longHelp : String { get {
+        var usageStr = "Usage: \(self.name) [command]\n\nValid commands:\n"
+        
         for command in subcommands {
-            print("\(command.name) ", appendNewLine: false)
+            usageStr += "\(command.name): \(command.parser.shortHelp)\n"
         }
-        print("")
-    }
+        usageStr += "\nFor more information, try \(self.name) [command] --help"
+        return usageStr
+    } }
 }

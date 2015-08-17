@@ -34,7 +34,10 @@ public protocol CommandParseResult : ParseResult {
 public protocol Parser {
     func parse(args: [String]) throws -> ParseResult
     var name: String { get }
-    func usage()
+    /**A short description to help the user understand how to use the parser */
+    var shortHelp : String { get }
+    /** A longer, potentially multi-line description of how to use the parser */
+    var longHelp: String { get }
 }
 public extension Parser {
     public func parseArguments() -> ParseResult? {
@@ -46,12 +49,12 @@ public extension Parser {
         }
         catch ParseError.OptionMissing(let opt){
             print("Missing option --\(opt.longName)")
-            self.usage()
+            print("\(self.longHelp)")
             return nil
         }
         catch {
             print("\(error)")
-            self.usage()
+            print("\(self.longHelp)")
             return nil
         }
     }
@@ -76,13 +79,8 @@ extension DefaultParser : Parser {
         }
         return t
     }
-    public func usage() {
-        var usageStr = "Usage: \(name)"
-        for option in options {
-            usageStr += " --\(option.longName) <\(option.longName)>"
-        }
-        print(usageStr)
-    }
+    public var shortHelp : String { get { return self.name } }
+    public var longHelp : String { get { return self.shortHelp } }
 }
 
 /**A parser that tries to match against a particular command. */
@@ -104,11 +102,6 @@ public final class CommandParser<T: ParseResult>: Parser {
         let newArgs = [String](args[1..<args.count]) //lop off the command name
         return try self.innerParser.parse(newArgs)
     }
-    public func usage() {
-        var usageStr = "Usage: \(name)"
-        for option in options {
-            usageStr += " --\(option.longName) <\(option.longName)>"
-        }
-        print(usageStr)
-    }
+    public var shortHelp : String { get { return self.name } }
+    public var longHelp : String { get { return self.shortHelp} }
 }
