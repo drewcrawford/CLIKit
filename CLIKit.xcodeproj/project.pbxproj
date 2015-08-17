@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */; };
 		3A2AAADB1B7892E500C566B1 /* CLIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2AAADA1B7892E500C566B1 /* CLIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A2AAAE21B7892E500C566B1 /* CLIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2AAAD71B7892E500C566B1 /* CLIKit.framework */; };
-		3A2AAAE71B7892E500C566B1 /* CLIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAAE61B7892E500C566B1 /* CLIKitTests.swift */; };
 		3A2AAAFB1B78931F00C566B1 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAAFA1B78931F00C566B1 /* Parser.swift */; };
 		3A2AAAFD1B78936800C566B1 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAAFC1B78936800C566B1 /* Option.swift */; };
 		3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */; };
@@ -27,11 +27,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDontCrashWithNoArgs.swift; sourceTree = "<group>"; };
 		3A2AAAD71B7892E500C566B1 /* CLIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2AAADA1B7892E500C566B1 /* CLIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLIKit.h; sourceTree = "<group>"; };
 		3A2AAADC1B7892E500C566B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A2AAAE11B7892E500C566B1 /* CLIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A2AAAE61B7892E500C566B1 /* CLIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIKitTests.swift; sourceTree = "<group>"; };
 		3A2AAAE81B7892E500C566B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A2AAAFA1B78931F00C566B1 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		3A2AAAFC1B78936800C566B1 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
@@ -91,9 +91,9 @@
 		3A2AAAE51B7892E500C566B1 /* CLIKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				3A2AAAE61B7892E500C566B1 /* CLIKitTests.swift */,
 				3A2AAAE81B7892E500C566B1 /* Info.plist */,
 				3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */,
+				3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */,
 			);
 			path = CLIKitTests;
 			sourceTree = "<group>";
@@ -216,8 +216,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */,
 				3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */,
-				3A2AAAE71B7892E500C566B1 /* CLIKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

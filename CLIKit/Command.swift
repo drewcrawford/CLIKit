@@ -57,6 +57,7 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
     private var recentlyParsedCommand : Command! = nil
     
     public func parse(args: [String]) throws -> ParseResult {
+        if args.count == 0 { throw ParseError.NoParserMatched }
         for command in subcommands {
             if args[0] == command.name {
                 recentlyParsedCommand = command
