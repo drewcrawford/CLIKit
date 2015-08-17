@@ -12,25 +12,30 @@
 
 import Foundation
 
+/**The command protocol.
+- note: You probably don't want to implement this directly; instead implementing EasyCommand. */
 public protocol Command {
     var parser: CLIKit.Parser { get }
     func command(parseResult: ParseResult)
     var name: String { get }
 }
 
-private struct LegalParseResult : ParseResult {
-    private func setValue(value: Any?, forKey key: String) {
+public struct LegalParseResult : ParseResult {
+    public func setValue(value: Any?, forKey key: String) {
         abort()
     }
-    private static func typeForKey(key: String) -> Any.Type {
+    public static func typeForKey(key: String) -> Any.Type {
         abort()
     }
+    public init() { }
 }
 
 /**A command that outputs legal text. */
-public final class LegalCommand : Command {
+public final class LegalCommand : EasyCommand {
+    public typealias ParseResultType = LegalParseResult
     public let name = "legal"
-    public let parser : Parser = CLIKit.CommandParser<LegalParseResult>(name: "legal", options: [], help: "Display legal information for this program.")
+    public let options : [Option] = []
+    public let shortHelp = "Display legal information"
     private let legalText: String
     public init(legalText: String) {
         self.legalText = legalText
@@ -97,7 +102,7 @@ public protocol EasyCommand: CLIKit.Command {
 }
 
 extension EasyCommand {
-    var parser: Parser {
+    public var parser: Parser {
         get {
             return CommandParser<ParseResultType>(name: self.name, options: self.options, help: self.shortHelp)
         }
