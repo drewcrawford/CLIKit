@@ -30,7 +30,7 @@ private struct LegalParseResult : ParseResult {
 /**A command that outputs legal text. */
 public final class LegalCommand : Command {
     public let name = "legal"
-    public let parser : Parser = CLIKit.CommandParser<LegalParseResult>(name: "legal", options: [])
+    public let parser : Parser = CLIKit.CommandParser<LegalParseResult>(name: "legal", options: [], help: "Display legal information for this program.")
     private let legalText: String
     public init(legalText: String) {
         self.legalText = legalText

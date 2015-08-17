@@ -28,7 +28,7 @@ private final class DontCrashWithNoArgs : CLIKit.Command {
         abort()
     }
     let name = "createIdentity"
-    let parser : CLIKit.Parser = DefaultParser<MyParseResult>(name: "Whatever", options: [])
+    let parser : CLIKit.Parser = CommandParser<MyParseResult>(name: "Whatever", options: [], help: "Something")
 }
 
 

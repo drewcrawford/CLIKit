@@ -85,12 +85,14 @@ extension DefaultParser : Parser {
 public final class CommandParser<T: ParseResult>: Parser {
     public var options: [Option]
     public var name: String
+    public var shortHelp: String
     
     private let innerParser: DefaultParser<T>
-    public init(name: String, options: [Option]) {
+    public init(name: String, options: [Option], help: String) {
         self.name = name
         self.options = options
         self.innerParser = DefaultParser(name: name, options: options)
+        self.shortHelp = help
     }
     
     public func parse(args: [String]) throws -> ParseResult {
@@ -100,6 +102,5 @@ public final class CommandParser<T: ParseResult>: Parser {
         let newArgs = [String](args[1..<args.count]) //lop off the command name
         return try self.innerParser.parse(newArgs)
     }
-    public var shortHelp : String { get { return self.name } }
     public var longHelp : String { get { return self.shortHelp} }
 }
