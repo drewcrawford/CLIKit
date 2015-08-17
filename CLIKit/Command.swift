@@ -87,3 +87,19 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
         return usageStr
     } }
 }
+
+/**Implement this to implement a command easily. */
+public protocol EasyCommand: CLIKit.Command {
+    typealias ParseResultType : ParseResult
+    var name: String { get }
+    var options: [Option] { get }
+    var shortHelp: String { get }
+}
+
+extension EasyCommand {
+    var parser: Parser {
+        get {
+            return CommandParser<ParseResultType>(name: self.name, options: self.options, help: self.shortHelp)
+        }
+    }
+}

@@ -15,7 +15,7 @@ import Foundation
 import XCTest
 
 
-private final class DontCrashWithNoArgs : CLIKit.Command {
+private final class DontCrashWithNoArgs : CLIKit.EasyCommand {
     private struct MyParseResult : CLIKit.ParseResult {
         private mutating func setValue(value: Any?, forKey key: String) {
             abort()
@@ -24,11 +24,13 @@ private final class DontCrashWithNoArgs : CLIKit.Command {
             abort()
         }
     }
+    typealias ParseResultType = MyParseResult
     private func command(parseResult: ParseResult) {
         abort()
     }
     let name = "createIdentity"
-    let parser : CLIKit.Parser = CommandParser<MyParseResult>(name: "Whatever", options: [], help: "Something")
+    let options : [Option] = []
+    let shortHelp = "DontCare"
 }
 
 
