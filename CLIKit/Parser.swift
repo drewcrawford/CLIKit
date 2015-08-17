@@ -62,12 +62,10 @@ public extension Parser {
 public final class DefaultParser<T: ParseResult> {
     public var options : [Option]
     public var name: String
-    public var subparsers : [Parser]
     
-    public init(name: String,options: [Option], subparsers: [Parser] = []) {
+    public init(name: String,options: [Option]) {
         self.name = name
         self.options = options
-        self.subparsers = subparsers
     }
 }
 
@@ -89,10 +87,10 @@ public final class CommandParser<T: ParseResult>: Parser {
     public var name: String
     
     private let innerParser: DefaultParser<T>
-    public init(name: String, options: [Option], subparsers: [Parser] = []) {
+    public init(name: String, options: [Option]) {
         self.name = name
         self.options = options
-        self.innerParser = DefaultParser(name: name, options: options, subparsers: subparsers)
+        self.innerParser = DefaultParser(name: name, options: options)
     }
     
     public func parse(args: [String]) throws -> ParseResult {
