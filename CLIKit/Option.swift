@@ -74,6 +74,10 @@ public final class DefaultOption: Option {
     }
 }
 
+extension DefaultOption : CustomStringConvertible {
+    public var description: String { get { return "<DefaultOption: \(longName)>" } }
+}
+
 /**An option for a secure field.  This kind of option cannot be passed as a command line argument.  Provide the default value or the user will be interactively prompted. */
 public final class SecureOption: Option {
     public let defaultValue: OptionType?
