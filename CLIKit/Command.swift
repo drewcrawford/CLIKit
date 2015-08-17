@@ -14,7 +14,7 @@ import Foundation
 
 public protocol Command {
     var parser: CLIKit.Parser { get }
-    func command<T: ParseResult>(parseResult: T)
+    func command(parseResult: ParseResult)
     var name: String { get }
 }
 
@@ -35,7 +35,7 @@ public final class LegalCommand : Command {
     public init(legalText: String) {
         self.legalText = legalText
     }
-    public func command<T: ParseResult>(parseResult: T) {
+    public func command(parseResult: ParseResult) {
         print(self.legalText)
     }
 }
@@ -72,7 +72,7 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
         throw ParseError.NoParserMatched
     }
     
-    public func command<T : ParseResult>(parseResult: T) {
+    public func command(parseResult: ParseResult) {
         recentlyParsedCommand.command(parseResult)
     }
     

@@ -24,7 +24,7 @@ private final class DontCrashWithNoArgs : CLIKit.Command {
             abort()
         }
     }
-    private func command<T : ParseResult>(parseResult: T) {
+    private func command(parseResult: ParseResult) {
         abort()
     }
     let name = "createIdentity"

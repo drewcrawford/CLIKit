@@ -42,7 +42,7 @@ final class GitLabSetToken: Command {
             return CLIKit.CommandParser<GitLabTokenResult>(name: "GitLabSetToken", options:[option], help: "whatever")
         }
     }
-    func command<T : ParseResult>(parseResult: T) {
+    func command(parseResult: ParseResult) {
         let result = parseResult as! GitLabTokenResult
     }
 }
