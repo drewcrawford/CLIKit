@@ -56,7 +56,7 @@ public final class LegalCommand : EasyCommand {
         return legalText
     }
     public func command(parseResult: ParseResult) {
-        var legalText = getNoticeText()
+        let legalText = getNoticeText()
         print(legalText)
     }
 }

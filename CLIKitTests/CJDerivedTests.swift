@@ -44,7 +44,7 @@ class CJDerivedTests: XCTestCase {
     func testLegalAndPriority() {
         let legalCommand = LegalCommand()
         let gitLabCommand = GitLabSetToken()
-        let metacommand = MetaCommand(name: "CaveJohnson", subcommands: [legalCommand, gitLabCommand] as! [Command])
+        let metacommand = MetaCommand(name: "CaveJohnson", subcommands: [legalCommand, gitLabCommand] )
         let _ = try! metacommand.parse(["legal"])
         //let priorityParser = CLIKit.PriorityParser(name: "cavejohnson", subparsers: [GitLabSetToken().parser, LegalCommand(legalText: "My legal text")])
         //let result = priorityParser
