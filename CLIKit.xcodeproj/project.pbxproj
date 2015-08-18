@@ -20,6 +20,7 @@
 		3A30A1141B83F073007BF212 /* LegalCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30A1131B83F073007BF212 /* LegalCommand.swift */; };
 		3A30A1161B83F098007BF212 /* MetaCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30A1151B83F098007BF212 /* MetaCommand.swift */; };
 		3A30A1181B83F0CB007BF212 /* EasyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30A1171B83F0CB007BF212 /* EasyCommand.swift */; };
+		3A30A11A1B83F3CD007BF212 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3A30A1191B83F3CD007BF212 /* LICENSE */; };
 		3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */; };
 		3AF9FA3D1B7895190001EFF2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9FA3C1B7895190001EFF2 /* Command.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		3A30A1131B83F073007BF212 /* LegalCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalCommand.swift; sourceTree = "<group>"; };
 		3A30A1151B83F098007BF212 /* MetaCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaCommand.swift; sourceTree = "<group>"; };
 		3A30A1171B83F0CB007BF212 /* EasyCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyCommand.swift; sourceTree = "<group>"; };
+		3A30A1191B83F3CD007BF212 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CJDerivedTests.swift; sourceTree = "<group>"; };
 		3AF9FA3C1B7895190001EFF2 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 		3A2AAAD91B7892E500C566B1 /* CLIKit */ = {
 			isa = PBXGroup;
 			children = (
+				3A30A1191B83F3CD007BF212 /* LICENSE */,
 				3A30A10F1B83EB7A007BF212 /* NOTICE */,
 				3A2AAADA1B7892E500C566B1 /* CLIKit.h */,
 				3A2AAADC1B7892E500C566B1 /* Info.plist */,
@@ -213,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A30A11A1B83F3CD007BF212 /* LICENSE in Resources */,
 				3A30A1101B83EB7A007BF212 /* NOTICE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
