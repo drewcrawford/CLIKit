@@ -25,6 +25,13 @@ public enum OptionType {
     }
 }
 
+public func ==(lhs: OptionType, rhs: String) -> Bool {
+    switch(lhs) {
+    case .StringOption(let str):
+        return str == rhs
+    }
+}
+
 extension OptionType : StringLiteralConvertible {
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
     public typealias UnicodeScalarLiteralType = Character
@@ -48,7 +55,7 @@ public protocol Option {
     /**A one-line help for the option */
     var shortHelp: String { get }
     
-    func parse<T: ParseResult>(inout args: [String], inout accumulateResult: T) throws
+    func parse(inout args: [String], inout accumulateResult: ParseResult) throws
 }
 
 public final class DefaultOption: Option {
@@ -64,13 +71,13 @@ public final class DefaultOption: Option {
         self.shortHelp = help
     }
     
-    public func parse<T: ParseResult>(inout args: [String], inout accumulateResult: T) throws {
+    public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
         let idx = args.indexOf("--\(longName)")
         guard let index = idx else { throw ParseError.OptionMissing(self) }
         args.removeAtIndex(index) //remove --whatever
         let value = args[index]
         args.removeAtIndex(index) //remove value itself
-        accumulateResult.setValue(value, forKey: longName)
+        accumulateResult[longName] = OptionType.StringOption(value)
     }
 }
 
@@ -98,16 +105,16 @@ public final class SecureOption: Option {
         self.shortHelp = help
     }
     
-    public func parse<T: ParseResult>(inout args: [String], inout accumulateResult: T) throws {
+    public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
         #if ENABLE_TESTING
             if value_for_unit_testing != nil {
-                accumulateResult.setValue(value_for_unit_testing, forKey: longName)
+                accumulateResult[longName] = OptionType.StringOption(value_for_unit_testing as! String) //🐞 support more types
                 return
             }
         #endif
         let value = getpass("Enter \(longName):")
-        let strValue = String(CString: value, encoding: NSUTF8StringEncoding)
-        accumulateResult.setValue(strValue, forKey: longName)
+        let strValue = String(CString: value, encoding: NSUTF8StringEncoding)!
+        accumulateResult[longName] = OptionType.StringOption(strValue)
     }
     
 }

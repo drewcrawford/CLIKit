@@ -16,15 +16,6 @@ import XCTest
 
 
 private final class DontCrashWithNoArgs : CLIKit.EasyCommand {
-    private struct MyParseResult : CLIKit.ParseResult {
-        private mutating func setValue(value: Any?, forKey key: String) {
-            abort()
-        }
-        private static func typeForKey(key: String) -> Any.Type {
-            abort()
-        }
-    }
-    typealias ParseResultType = MyParseResult
     private func command(parseResult: ParseResult) {
         abort()
     }

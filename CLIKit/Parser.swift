@@ -37,17 +37,16 @@ extension ErrorType {
     }
 }
 
-public protocol KeyValueCodeable {
-    mutating func setValue(value: Any?, forKey key: String)
-    static func typeForKey(key: String) -> Any.Type
-}
-
-public protocol ParseResult : KeyValueCodeable {
-    init()
-}
-
-public protocol CommandParseResult : ParseResult {
-    var commandImplementation: () -> () { get set }
+public struct ParseResult {
+    private var innerDict : [String: OptionType] = [:]
+    public subscript(key: String) -> OptionType? {
+        get {
+            return innerDict[key]
+        }
+        set {
+            innerDict[key] = newValue
+        }
+    }
 }
 
 public protocol Parser {
@@ -78,7 +77,7 @@ public extension Parser {
         return nil
     }
 }
-public final class DefaultParser<T: ParseResult> {
+public final class DefaultParser {
     public var options : [Option]
     public var name: String
     
@@ -90,7 +89,7 @@ public final class DefaultParser<T: ParseResult> {
 
 extension DefaultParser : Parser {
     public func parse(var args: [String]) throws -> ParseResult {
-        var t = T()
+        var t = ParseResult()
         for option in options {
             try option.parse(&args, accumulateResult: &t)
         }
@@ -101,12 +100,12 @@ extension DefaultParser : Parser {
 }
 
 /**A parser that tries to match against a particular command. */
-public final class CommandParser<T: ParseResult>: Parser {
+public final class CommandParser: Parser {
     public var options: [Option]
     public var name: String
     public var shortHelp: String
     
-    private let innerParser: DefaultParser<T>
+    private let innerParser: DefaultParser
     public init(name: String, options: [Option], help: String) {
         self.name = name
         self.options = options

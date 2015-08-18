@@ -14,36 +14,15 @@ import Foundation
 import XCTest
 @testable import CLIKit
 
-struct GitLabTokenResult : CLIKit.ParseResult {
-    var token: String! = nil
-    mutating func setValue(value: Any?, forKey key: String) {
-        switch(key) {
-        case "token":
-            self.token = value as! String?
-        default:
-            preconditionFailure("Can't set value for key \(key)")
-        }
-    }
-    static func typeForKey(key: String) -> Any.Type {
-        switch(key) {
-        case "token":
-            return String.self
-        default:
-            preconditionFailure("Can't set value for key \(key)")
-        }
-    }
-}
-
 final class GitLabSetToken: Command {
     var name : String { get { return "gitLabSetToken" } }
     var parser : CLIKit.Parser {
         get {
             let option = CLIKit.SecureOption(longName: "token", help:"no",value_for_unit_testing: "mytoken")
-            return CLIKit.CommandParser<GitLabTokenResult>(name: "GitLabSetToken", options:[option], help: "whatever")
+            return CLIKit.CommandParser(name: "GitLabSetToken", options:[option], help: "whatever")
         }
     }
     func command(parseResult: ParseResult) {
-        let result = parseResult as! GitLabTokenResult
     }
 }
 
@@ -51,15 +30,15 @@ final class GitLabSetToken: Command {
 class CJDerivedTests: XCTestCase {
     func testGitLabParse() {
         let gitLabToken = SecureOption(longName: "token", help:"no",defaultValue: nil, required: true, value_for_unit_testing: "MyToken")
-        let storeTokenParser = CLIKit.CommandParser<GitLabTokenResult>(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
-        let _p : GitLabTokenResult = try! storeTokenParser.parse(["storeGitLabToken","--token","mytoken"]) as! GitLabTokenResult
-        XCTAssert(_p.token == "MyToken")
+        let storeTokenParser = CLIKit.CommandParser(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
+        let _p = try! storeTokenParser.parse(["storeGitLabToken","--token","mytoken"])
+        XCTAssert(_p["token"]! == "MyToken")
     }
     
     func testGitLabCommand() {
         let storeTokenParser = GitLabSetToken().parser
-        let _p : GitLabTokenResult = try! storeTokenParser.parse(["GitLabSetToken","--token","mytoken"]) as! GitLabTokenResult
-        XCTAssert(_p.token == "mytoken", "\(_p.token)")
+        let _p = try! storeTokenParser.parse(["GitLabSetToken","--token","mytoken"])
+        XCTAssert(_p["token"]! == "mytoken")
     }
     
     func testLegalAndPriority() {

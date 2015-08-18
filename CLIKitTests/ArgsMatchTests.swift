@@ -16,32 +16,6 @@ private let fisaFileOption = CLIKit.DefaultOption(longName: "fisaFile", help: "P
 
 
 private final class CreateFISACommand : CLIKit.EasyCommand {
-    typealias ParseResultType = MyParseResult
-    private struct MyParseResult : CLIKit.ParseResult {
-        var identityFile: String! = nil
-        var fisaFile: String! = nil
-        var identityDescription: String! = nil
-        private mutating func setValue(value: Any?, forKey key: String) {
-            switch(key) {
-            case "identityFile":
-                identityFile = value as! String
-            case "fisaFile":
-                fisaFile = value as! String
-            case "identityDescription":
-                identityDescription = value as! String
-            default:
-                preconditionFailure("Unknown key \(key)")
-            }
-        }
-        private static func typeForKey(key: String) -> Any.Type {
-            switch(key) {
-            case "identityFile", "fisaFile", "identityDescription":
-                return String.self
-            default:
-                preconditionFailure("Unknown key \(key)")
-            }
-        }
-    }
     private let options : [Option] = [identityOption, fisaFileOption, DefaultOption(longName: "identityDescription", help: "The description to use for your identity in the new FISA file.")]
     private let shortHelp = "Create a new identity and save it to the specified file."
     let name = "createFISA"
@@ -58,7 +32,7 @@ class ArgsMatchTestsTests : XCTestCase {
         let metaParser = MetaCommand(name: "ArgsMatchTests", subcommands: [CreateFISACommand()])
         let result = try! metaParser.parse(["createFISA","--identityDescription","shadowfax is the best computer ever",
             "--fisaFile", "/tmp/test.fisa",
-            "--identityFile","/tmp/identity.fisa"]) as! CreateFISACommand.MyParseResult
-        XCTAssert(result.identityFile == "/tmp/identity.fisa")
+            "--identityFile","/tmp/identity.fisa"])
+        XCTAssert(result["identityFile"]! == "/tmp/identity.fisa")
     }
 }

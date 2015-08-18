@@ -20,19 +20,8 @@ public protocol Command {
     var name: String { get }
 }
 
-public struct LegalParseResult : ParseResult {
-    public func setValue(value: Any?, forKey key: String) {
-        abort()
-    }
-    public static func typeForKey(key: String) -> Any.Type {
-        abort()
-    }
-    public init() { }
-}
-
 /**A command that outputs legal text. */
 public final class LegalCommand : EasyCommand {
-    public typealias ParseResultType = LegalParseResult
     public let name = "legal"
     public let options : [Option] = []
     public let shortHelp = "Display legal information"
@@ -95,7 +84,6 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
 
 /**Implement this to implement a command easily. */
 public protocol EasyCommand: CLIKit.Command {
-    typealias ParseResultType : ParseResult
     var name: String { get }
     var options: [Option] { get }
     var shortHelp: String { get }
@@ -104,7 +92,7 @@ public protocol EasyCommand: CLIKit.Command {
 extension EasyCommand {
     public var parser: Parser {
         get {
-            return CommandParser<ParseResultType>(name: self.name, options: self.options, help: self.shortHelp)
+            return CommandParser(name: self.name, options: self.options, help: self.shortHelp)
         }
     }
 }

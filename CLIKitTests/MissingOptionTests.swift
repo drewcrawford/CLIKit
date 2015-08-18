@@ -14,28 +14,7 @@ import Foundation
 import XCTest
 @testable import CLIKit
 
-private final class MissingOptionCmd : CLIKit.EasyCommand {
-    
-    private struct MyParseResult : CLIKit.ParseResult {
-        var whatever: String! = nil
-        private mutating func setValue(value: Any?, forKey key: String) {
-            switch(key) {
-            case "whatever":
-                whatever = value as! String
-            default:
-                preconditionFailure("Unknown key \(key)")
-            }
-        }
-        private static func typeForKey(key: String) -> Any.Type {
-            switch(key) {
-            case "whatever":
-                return String.self
-            default:
-                preconditionFailure("Unknown key \(key)")
-            }
-        }
-    }
-    typealias ParseResultType = MyParseResult
+private final class MissingOptionCmd : CLIKit.EasyCommand {    
     private func command(parseResult: ParseResult) {
         abort()
     }
