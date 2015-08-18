@@ -36,6 +36,6 @@ class DontCrashWithNoArgsTests : XCTestCase {
     
     func testUsage() {
         let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
-        let str = try metacommand.longHelp
+        let _ = metacommand.longHelp
     }
 }
