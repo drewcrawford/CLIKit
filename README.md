@@ -1,4 +1,4 @@
-CLIKit is an advanced, intuitive command-line parsing library.  It's designed to be elegant, powerful, and have all the right defaults.
+CLIKit is an advanced, intuitive command-line parsing library for Swift programs.  It's designed to be elegant, powerful, and have all the right defaults.
 
 # Usage
 
