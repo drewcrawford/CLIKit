@@ -25,12 +25,39 @@ public final class LegalCommand : EasyCommand {
     public let name = "legal"
     public let options : [Option] = []
     public let shortHelp = "Display legal information"
-    private let legalText: String
-    public init(legalText: String) {
-        self.legalText = legalText
+    public init() { /* */ }
+    
+    private func getNoticeText(bundle bundle: NSBundle) -> String? {
+        let notices = ["NOTICE","LICENSE"]
+        for notice in notices {
+            if let noticePath = bundle.pathForResource(notice, ofType: nil) {
+                return (NSString(data:NSData(contentsOfFile: noticePath)!, encoding:NSUTF8StringEncoding) as! String)
+            }
+        }
+        return nil
+    }
+    
+    internal func getNoticeText() -> String {
+        var legalText = ""
+        for bundle in NSBundle.allBundles() + NSBundle.allFrameworks() {
+            if let noticeText = getNoticeText(bundle: bundle) {
+                //get bundle name and version
+                var bundleName : String = bundle.description
+                var bundleVersion : String = ""
+                if let info = bundle.infoDictionary {
+                    if let name = info[String(kCFBundleNameKey)] as? String { bundleName = name }
+                    if let version = info[String(kCFBundleVersionKey)] as? String { bundleVersion = version }
+                }
+                legalText += "\(bundleName) \(bundleVersion)\n"
+                legalText += noticeText
+                legalText += "\n\n"
+            }
+        }
+        return legalText
     }
     public func command(parseResult: ParseResult) {
-        print(self.legalText)
+        var legalText = getNoticeText()
+        print(legalText)
     }
 }
 
@@ -45,7 +72,7 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
     }
     public init(name: String, subcommands: [Command]) {
         self.name = name
-        self.subcommands = subcommands
+        self.subcommands = subcommands + [LegalCommand()]
     }
     
     private var recentlyParsedCommand : Command! = nil
