@@ -33,6 +33,10 @@ git "https://code.sealedabstract.com/drewcrawford/CLIKit.git" "master"
 
 to your Cartfile.
 
+# Mailing list
+
+We use [code.sa](http://discuss.sealedabstract.com/c/code-sa/clikit)
+
 # License
 
 This software is licensed under an open-source strong copyleft license, the [RPL](http://opensource.org/licenses/RPL-1.5).  If that doesn't work for you, commercial licensing is available from the [author](drew@sealedabstract.com).  
