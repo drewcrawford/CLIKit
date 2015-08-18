@@ -12,31 +12,25 @@
 
 import Foundation
 
-enum ParseError : ErrorType {
-    case OptionMissing(Option)
-    case NotThisCommand
-    case NoParserMatched
-    case InnerParserFailed(ErrorType, Parser)
-    
-    var 📡_22310636Description: String {
-        switch(self) {
-        case .OptionMissing(let option):
-            return "Missing option --\(option.longName)"
-        default:
-            return "\(self)"
-        }
-    }
-}
+/**A type that holds the result of the parse.  The result is subscriptable.
 
-extension ErrorType {
-    var 📡22310636Description: String {
-        if let e = self as? ParseError {
-            return e.📡_22310636Description
-        }
-        return "\(self)"
-    }
-}
+- note: It's recommended that you use strongly-typed keys where possible.  Thus you could create
 
+```
+enum StronglyTyped: String {
+    case MyKey = "MyKey"
+    case MyKey2 = "MyKey2"
+}
+```
+
+and then
+
+```
+parseResult[StronglyTyped.MyKey.rawValue]
+```
+
+This way you ensure you don't have typos in your parsing logic.
+*/
 public struct ParseResult {
     private var innerDict : [String: OptionType] = [:]
     public subscript(key: String) -> OptionType? {
@@ -49,6 +43,8 @@ public struct ParseResult {
     }
 }
 
+/**This is the protocol that all Parsers conform to.  If you actually want an implementation, try `DefaultParser`.
+*/
 public protocol Parser {
     func parse(args: [String]) throws -> ParseResult
     var name: String { get }
@@ -58,6 +54,7 @@ public protocol Parser {
     var longHelp: String { get }
 }
 public extension Parser {
+    /**Parse the arguments from the environment, displaying error and usage information to the user on a parse error.*/
     public func parseArguments() -> ParseResult? {
         do {
             let args = NSProcessInfo.processInfo().arguments
@@ -77,10 +74,15 @@ public extension Parser {
         return nil
     }
 }
+
+/**The standard parser. */
 public final class DefaultParser {
     public var options : [Option]
     public var name: String
     
+    /**Creates the standard parser
+- parameter name: A name for this parser.  This is used in help.
+- parameter options: The options for this parser. */
     public init(name: String,options: [Option]) {
         self.name = name
         self.options = options
@@ -97,38 +99,4 @@ extension DefaultParser : Parser {
     }
     public var shortHelp : String { get { return self.name } }
     public var longHelp : String { get { return self.shortHelp } }
-}
-
-/**A parser that tries to match against a particular command. */
-public final class CommandParser: Parser {
-    public var options: [Option]
-    public var name: String
-    public var shortHelp: String
-    
-    private let innerParser: DefaultParser
-    public init(name: String, options: [Option], help: String) {
-        self.name = name
-        self.options = options
-        self.innerParser = DefaultParser(name: name, options: options)
-        self.shortHelp = help
-    }
-    
-    public func parse(args: [String]) throws -> ParseResult {
-        if args[0] != name {
-            throw ParseError.NotThisCommand
-        }
-        let newArgs = [String](args[1..<args.count]) //lop off the command name
-        return try self.innerParser.parse(newArgs)
-    }
-    public var longHelp : String { get {
-        var usageStr = "\(self.name)"
-        for option in self.options {
-            usageStr += " --\(option.longName) [\(option.longName)]"
-        }
-        usageStr += "\n\n"
-        for option in self.options {
-            usageStr += "\(option.longName): \(option.shortHelp)\n"
-        }
-        return usageStr
-    } }
 }
