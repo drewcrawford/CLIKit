@@ -45,7 +45,7 @@ final class LegalCommand : EasyCommand {
                 var bundleVersion : String = ""
                 if let info = bundle.infoDictionary {
                     if let name = info[String(kCFBundleNameKey)] as? String { bundleName = name }
-                    if let version = info[String(kCFBundleVersionKey)] as? String { bundleVersion = version }
+                    if let version = info[String("CFBundleShortVersionString")] as? String { bundleVersion = version }
                 }
                 legalText += "\(bundleName) \(bundleVersion)\n"
                 legalText += noticeText
