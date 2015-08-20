@@ -81,7 +81,12 @@ public final class DefaultOption: Option {
     
     public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
         let idx = args.indexOf("--\(longName)")
-        guard let index = idx else { throw ParseError.OptionMissing(self) }
+        guard let index = idx else {
+            //is there a default value?
+            guard let d = defaultValue else { throw ParseError.OptionMissing(self) }
+            accumulateResult[longName] = d
+            return
+        }
         args.removeAtIndex(index) //remove --whatever
         let value = args[index]
         args.removeAtIndex(index) //remove value itself

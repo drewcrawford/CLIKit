@@ -22,6 +22,7 @@
 		3A30A1181B83F0CB007BF212 /* EasyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30A1171B83F0CB007BF212 /* EasyCommand.swift */; };
 		3A30A11A1B83F3CD007BF212 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3A30A1191B83F3CD007BF212 /* LICENSE */; };
 		3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */; };
+		3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */; };
 		3AF9FA3D1B7895190001EFF2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9FA3C1B7895190001EFF2 /* Command.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		3A30A1171B83F0CB007BF212 /* EasyCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyCommand.swift; sourceTree = "<group>"; };
 		3A30A1191B83F3CD007BF212 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CJDerivedTests.swift; sourceTree = "<group>"; };
+		3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultOptionTests.swift; sourceTree = "<group>"; };
 		3AF9FA3C1B7895190001EFF2 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 				3A30A1091B822452007BF212 /* MissingOptionTests.swift */,
 				3A30A10B1B8263AC007BF212 /* ArgsMatchTests.swift */,
 				3A30A10D1B83E8CB007BF212 /* LegalTests.swift */,
+				3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */,
 			);
 			path = CLIKitTests;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */,
 				3A30A10E1B83E8CB007BF212 /* LegalTests.swift in Sources */,
 				3A30A10A1B822452007BF212 /* MissingOptionTests.swift in Sources */,
+				3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */,
 				3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
