@@ -40,7 +40,7 @@ final class VersionCommand : EasyCommand {
             }
         }
         
-        print("\(name) \(version) \(build)")
+        print("\(name) \(version) (\(build))")
         if let legalInfo = LegalCommand.getNoticeText(bundle: NSBundle.mainBundle()) {
             print("\(legalInfo)")
         }
