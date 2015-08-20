@@ -54,7 +54,8 @@ public struct ParseResult {
 /**This is the protocol that all Parsers conform to.  If you actually want an implementation, try `DefaultParser`.
 */
 public protocol Parser {
-    func parse(args: [String]) throws -> ParseResult
+    /**Implement parsing logic here.  Don't call this function directly, instead call `.parse` */
+    func _parse(args: [String]) throws -> ParseResult
     var name: String { get }
     /**A short description to help the user understand how to use the parser */
     var shortHelp : String { get }
@@ -66,6 +67,13 @@ public protocol Parser {
     func handlesArguments(args: [String]) -> Bool
 }
 public extension Parser {
+    func parse(args: [String]) throws -> ParseResult {
+        if args.indexOf("--help") != nil {
+            print("\(self.longHelp)")
+            throw ParseError.UserWantsHelp
+        }
+        return try _parse(args)
+    }
     /**Parse the arguments from the environment, displaying error and usage information to the user on a parse error.*/
     public func parseArguments() -> ParseResult? {
         do {
@@ -111,7 +119,7 @@ public final class DefaultParser {
 }
 
 extension DefaultParser : Parser {
-    public func parse(var args: [String]) throws -> ParseResult {
+    public func _parse(var args: [String]) throws -> ParseResult {
         var t = ParseResult()
         for option in options {
             try option.parse(&args, accumulateResult: &t)

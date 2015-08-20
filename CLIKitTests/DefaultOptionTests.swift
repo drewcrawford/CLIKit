@@ -47,4 +47,14 @@ class DefaultOptionTests : XCTestCase {
         let search = results.rangeOfString("fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
         XCTAssert(search != nil)
     }
+    
+    func testUserWantsHelp() {
+        let cmd = CreateFISACommand()
+        do {
+            try cmd.parser.parse(["--help"])
+            XCTFail("Should have raised parse error")
+        }
+        catch ParseError.UserWantsHelp { /* */ }
+        catch { XCTFail("\(error)")}
+    }
 }

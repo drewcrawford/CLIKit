@@ -64,7 +64,7 @@ public final class CommandParser: Parser {
         return false
     }
     
-    public func parse(args: [String]) throws -> ParseResult {
+    public func _parse(args: [String]) throws -> ParseResult {
         if !handlesArguments(args) {
             throw ParseError.NotThisCommand
         }
