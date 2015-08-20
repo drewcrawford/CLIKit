@@ -65,11 +65,18 @@ public protocol Parser {
     /**Determines if the parser handles the arguments.  The default implementation attempts a parse, and returns false if the parse fails.
 - discussion: This is used inside the CommandParser to indicate whether the command matches the input.  That way if the command matches, but some argument fails, we return an error to the user from the parser that handled the arguments. */
     func handlesArguments(args: [String]) -> Bool
+    
+    /**Returns the best parser candidate for the given arguments.  The default implementation returns the receiver.
+- discussion: With metaparsers, returning a child object here may yield better error/help messages.*/
+    func underlyingParser(args: [String]) -> Parser
 }
 public extension Parser {
+    func underlyingParser(args: [String]) -> Parser {
+        return self
+    }
     func parse(args: [String]) throws -> ParseResult {
         if args.indexOf("--help") != nil {
-            print("\(self.longHelp)")
+            print("\(self.underlyingParser(args).longHelp)")
             throw ParseError.UserWantsHelp
         }
         return try _parse(args)

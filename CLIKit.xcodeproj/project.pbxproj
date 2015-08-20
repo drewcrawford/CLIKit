@@ -25,6 +25,7 @@
 		3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */; };
 		3AC49A551B86827200B8237E /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC49A541B86827200B8237E /* VersionCommand.swift */; };
 		3AC49A571B86865200B8237E /* VersionCommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC49A561B86865200B8237E /* VersionCommandTests.swift */; };
+		3AC49A591B868E0200B8237E /* HelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC49A581B868E0200B8237E /* HelpTests.swift */; };
 		3AF9FA3D1B7895190001EFF2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9FA3C1B7895190001EFF2 /* Command.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultOptionTests.swift; sourceTree = "<group>"; };
 		3AC49A541B86827200B8237E /* VersionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
 		3AC49A561B86865200B8237E /* VersionCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCommandTests.swift; sourceTree = "<group>"; };
+		3AC49A581B868E0200B8237E /* HelpTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTests.swift; sourceTree = "<group>"; };
 		3AF9FA3C1B7895190001EFF2 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 				3A30A10D1B83E8CB007BF212 /* LegalTests.swift */,
 				3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */,
 				3AC49A561B86865200B8237E /* VersionCommandTests.swift */,
+				3AC49A581B868E0200B8237E /* HelpTests.swift */,
 			);
 			path = CLIKitTests;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				3A30A10E1B83E8CB007BF212 /* LegalTests.swift in Sources */,
 				3A30A10A1B822452007BF212 /* MissingOptionTests.swift in Sources */,
 				3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */,
+				3AC49A591B868E0200B8237E /* HelpTests.swift in Sources */,
 				3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

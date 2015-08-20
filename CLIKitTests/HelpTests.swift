@@ -1,5 +1,5 @@
 //
-//  DefaultOptionTests.swift
+//  HelpTests.swift
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/20/15.
@@ -19,6 +19,7 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
+
 import XCTest
 @testable import CLIKit
 
@@ -34,17 +35,24 @@ private final class CreateFISACommand : CLIKit.EasyCommand {
     }
 }
 
-class DefaultOptionTests : XCTestCase {
-    func testDefaultOptions() {
+class HelpTests : XCTestCase {
+    func testUserWantsHelp() {
         let cmd = CreateFISACommand()
-        let results = try! cmd.parser.parse(["createFISA", "--identityFile","whatever","--identityDescription","whatever"])
-        XCTAssert(results["fisaFile"]! == "DefaultFISAFile")
+        do {
+            try cmd.parser.parse(["--help"])
+            XCTFail("Should have raised parse error")
+        }
+        catch ParseError.UserWantsHelp { /* */ }
+        catch { XCTFail("\(error)")}
     }
     
-    func testDefaultHelp() {
-        let cmd = CreateFISACommand()
-        let results = cmd.parser.longHelp
-        let search = results.rangeOfString("fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
-        XCTAssert(search != nil)
+    func testMetaWantsHelp() {
+        let meta = MetaCommand(name: "meta", subcommands: [CreateFISACommand()])
+        do {
+            try meta.parser.parse(["createFISA","--help"])
+            XCTFail("Should have raised parse error")
+        }
+        catch ParseError.UserWantsHelp { /* */ }
+        catch { XCTFail("\(error)")}
     }
 }

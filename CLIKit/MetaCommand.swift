@@ -53,6 +53,13 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
         throw ParseError.NoParserMatched
     }
     
+    public func underlyingParser(args: [String]) -> Parser {
+        for child in subcommands {
+            if child.parser.handlesArguments(args) { return child.parser }
+        }
+        return self
+    }
+    
     public func command(parseResult: ParseResult) {
         recentlyParsedCommand.command(parseResult)
     }
