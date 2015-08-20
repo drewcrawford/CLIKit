@@ -40,4 +40,11 @@ class DefaultOptionTests : XCTestCase {
         let results = try! cmd.parser.parse(["createFISA", "--identityFile","whatever","--identityDescription","whatever"])
         XCTAssert(results["fisaFile"]! == "DefaultFISAFile")
     }
+    
+    func testDefaultHelp() {
+        let cmd = CreateFISACommand()
+        let results = cmd.parser.longHelp
+        let search = results.rangeOfString("fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
+        XCTAssert(search != nil)
+    }
 }

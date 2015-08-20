@@ -66,6 +66,24 @@ public protocol Option {
     func parse(inout args: [String], inout accumulateResult: ParseResult) throws
 }
 
+extension Option {
+    /**A more detailed help for the option.  This might include information about default values, remarks, etc. */
+    public var longHelp : String {
+        get {
+            var helpStr = "\(longName)"
+            if self.defaultValue != nil {
+                helpStr += " (optional)"
+            }
+            helpStr += ": "
+            helpStr += shortHelp
+            if self.defaultValue != nil {
+                helpStr += "\nThe default value is \(defaultValue!.stringValue!)."
+            }
+            return helpStr
+        }
+    }
+}
+
 public final class DefaultOption: Option {
     public let defaultValue: OptionType?
     public let required: Bool

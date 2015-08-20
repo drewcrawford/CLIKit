@@ -67,7 +67,7 @@ public final class CommandParser: Parser {
         }
         usageStr += "\n\n"
         for option in self.options {
-            usageStr += "\(option.longName): \(option.shortHelp)\n"
+            usageStr += "\(option.longHelp)\n"
         }
         return usageStr
         } }
