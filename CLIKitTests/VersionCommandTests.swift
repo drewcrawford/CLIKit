@@ -1,8 +1,8 @@
 //
-//  Command.swift
+//  VersionCommandTests.swift
 //  CLIKit
 //
-//  Created by Drew Crawford on 8/10/15.
+//  Created by Drew Crawford on 8/20/15.
 //  Copyright © 2015 DrewCrawfordApps. All rights reserved.
 //  CLIKit © 2015 DrewCrawfordApps LLC
 //
@@ -19,22 +19,22 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
+import XCTest
+@testable import CLIKit
 
-/**The command protocol.
-- note: You probably don't want to implement this directly; instead implementing EasyCommand. */
-public protocol Command {
-    var parser: CLIKit.Parser { get }
-    func command(parseResult: ParseResult)
-    var name: String { get }
-    
-    /**Additional aliases for the given command.  Override this to specify alternatives. */
-    var aliases : [String] { get }
-}
-
-extension Command {
-    public var aliases : [String] {
-        get {
-            return []
-        }
+class VersionTests : XCTestCase {
+    func testAlias() {
+        let version = VersionCommand()
+        try! version.parser.parse(["--version"])
+    }
+    func testVersion() {
+        let version = VersionCommand()
+        let parseResult = try! version.parser.parse(["--version"])
+        version.command(parseResult)
+    }
+    func testVersionDefaults() {
+        let version = MetaCommand(name: "mymeta", subcommands: [])
+        let parseResult = try! version.parser.parse(["--version"])
+        version.command(parseResult)
     }
 }

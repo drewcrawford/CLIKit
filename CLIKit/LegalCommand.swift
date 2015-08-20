@@ -26,7 +26,8 @@ final class LegalCommand : EasyCommand {
     let shortHelp = "Display legal information"
     init() { /* */ }
     
-    private func getNoticeText(bundle bundle: NSBundle) -> String? {
+    /**Gets the legal notice text for the specified bundle, if any */
+    static func getNoticeText(bundle bundle: NSBundle) -> String? {
         let notices = ["NOTICE","LICENSE"]
         for notice in notices {
             if let noticePath = bundle.pathForResource(notice, ofType: nil) {
@@ -39,7 +40,7 @@ final class LegalCommand : EasyCommand {
     internal func getNoticeText() -> String {
         var legalText = ""
         for bundle in NSBundle.allBundles() + NSBundle.allFrameworks() {
-            if let noticeText = getNoticeText(bundle: bundle) {
+            if let noticeText = LegalCommand.getNoticeText(bundle: bundle) {
                 //get bundle name and version
                 var bundleName : String = bundle.description
                 var bundleVersion : String = ""

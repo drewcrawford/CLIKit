@@ -60,6 +60,10 @@ public protocol Parser {
     var shortHelp : String { get }
     /** A longer, potentially multi-line description of how to use the parser */
     var longHelp: String { get }
+    
+    /**Determines if the parser handles the arguments.  The default implementation attempts a parse, and returns false if the parse fails.
+- discussion: This is used inside the CommandParser to indicate whether the command matches the input.  That way if the command matches, but some argument fails, we return an error to the user from the parser that handled the arguments. */
+    func handlesArguments(args: [String]) -> Bool
 }
 public extension Parser {
     /**Parse the arguments from the environment, displaying error and usage information to the user on a parse error.*/
@@ -80,6 +84,15 @@ public extension Parser {
             return nil
         }
         return nil
+    }
+    public func handlesArguments(args: [String]) -> Bool {
+        do {
+            try parse(args)
+            return true
+        }
+        catch {
+            return false
+        }
     }
 }
 

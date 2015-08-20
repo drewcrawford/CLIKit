@@ -33,7 +33,7 @@ public protocol EasyCommand: CLIKit.Command {
 extension EasyCommand {
     public var parser: Parser {
         get {
-            return CommandParser(name: self.name, options: self.options, help: self.shortHelp)
+            return CommandParser(name: self.name, options: self.options, help: self.shortHelp, aliases: self.aliases)
         }
     }
 }
@@ -43,18 +43,29 @@ extension EasyCommand {
 public final class CommandParser: Parser {
     public var options: [Option]
     public var name: String
+    public var aliases: [String]
     public var shortHelp: String
     
     private let innerParser: DefaultParser
-    public init(name: String, options: [Option], help: String) {
+    public init(name: String, options: [Option], help: String, aliases: [String] = []) {
         self.name = name
         self.options = options
         self.innerParser = DefaultParser(name: name, options: options)
         self.shortHelp = help
+        self.aliases = aliases
+    }
+    
+    public func handlesArguments(args: [String]) -> Bool {
+        var allAliases = aliases
+        allAliases.append(name)
+        for alias in allAliases {
+            if alias == args[0] { return true}
+        }
+        return false
     }
     
     public func parse(args: [String]) throws -> ParseResult {
-        if args[0] != name {
+        if !handlesArguments(args) {
             throw ParseError.NotThisCommand
         }
         let newArgs = [String](args[1..<args.count]) //lop off the command name
