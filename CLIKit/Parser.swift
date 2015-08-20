@@ -93,6 +93,10 @@ public extension Parser {
             print("\(innerError.📡22310636Description)")
             print("Usage: \(self.name) \(parser.longHelp)")
         }
+        catch ParseError.UserWantsHelp {
+            /*In this case, we've already printed the help. */
+            return nil
+        }
         catch {
             print("\(error.📡22310636Description)")
             print("Usage: \(self.longHelp)")
