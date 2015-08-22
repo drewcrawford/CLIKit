@@ -74,7 +74,7 @@ public final class CommandParser: Parser {
     public var longHelp : String { get {
         var usageStr = "\(self.name)"
         for option in self.options {
-            usageStr += " --\(option.longName) [\(option.longName)]"
+            usageStr += " \(option.usageHelp)"
         }
         usageStr += "\n\n"
         for option in self.options {

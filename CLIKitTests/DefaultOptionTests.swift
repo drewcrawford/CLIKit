@@ -41,6 +41,13 @@ class DefaultOptionTests : XCTestCase {
         XCTAssert(results["fisaFile"]! == "DefaultFISAFile")
     }
     
+    func testOptionHelp() {
+        let o = identityOption.longHelp
+        XCTAssert(o == "identityFile: Path to the location file.  For security reasons, it must have permissions 0600 (only user-readable)")
+        let p = identityOption.usageHelp
+        XCTAssert(p == "--identityFile [identityFile]")
+    }
+    
     func testDefaultHelp() {
         let cmd = CreateFISACommand()
         let results = cmd.parser.longHelp

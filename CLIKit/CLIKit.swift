@@ -26,6 +26,7 @@ enum ParseError : ErrorType {
     case NoParserMatched
     case InnerParserFailed(ErrorType, Parser)
     case UserWantsHelp
+    case UnknownChoice(String, [String])
     
     var 📡_22310636Description: String {
         switch(self) {
