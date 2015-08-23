@@ -59,13 +59,13 @@ extension OptionType : StringLiteralConvertible {
 public protocol Option {
     var defaultValue: OptionType? { get }
     var required: Bool { get }
-    /**A more detailed help for the option.  This might include information about default values, remarks, etc. */
     var longName: String { get }
     /**A one-line help for the option */
     var shortHelp: String { get }
-    
     /**A usage string for the option.  This is typically e.g. `--option [option]` */
     var usageHelp: String { get }
+    /**A more detailed help for the option.  This might include information about default values, remarks, etc. */
+    var longHelp: String { get }
     
     func parse(inout args: [String], inout accumulateResult: ParseResult) throws
 }

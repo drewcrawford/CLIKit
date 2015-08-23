@@ -41,6 +41,7 @@ public final class ChoiceOption : Option {
         accumulateResult[longName] = OptionType.StringOption(choice)
     }
     
+    /**This constructor uses strings for choices due to 📡22393113 */
     public init(longName:String, shortHelp: String, choices: [String], defaultValue:OptionType? = nil) {
         self.longName = longName
         self.shortHelp = shortHelp
