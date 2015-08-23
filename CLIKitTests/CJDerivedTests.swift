@@ -40,13 +40,13 @@ class CJDerivedTests: XCTestCase {
         let gitLabToken = SecureOption(longName: "token", help:"no",defaultValue: nil, required: true, value_for_unit_testing: "MyToken")
         let storeTokenParser = CLIKit.CommandParser(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
         let _p = try! storeTokenParser.parse(["storeGitLabToken","--token","mytoken"])
-        XCTAssert(_p["token"]! == "MyToken")
+        XCTAssert(_p["token"] == "MyToken")
     }
     
     func testGitLabCommand() {
         let storeTokenParser = GitLabSetToken().parser
         let _p = try! storeTokenParser.parse(["GitLabSetToken","--token","mytoken"])
-        XCTAssert(_p["token"]! == "mytoken")
+        XCTAssert(_p["token"] == "mytoken")
     }
     
     func testLegalAndPriority() {

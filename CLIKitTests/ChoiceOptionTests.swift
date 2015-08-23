@@ -29,7 +29,7 @@ class ChoiceOptionTests : XCTestCase {
         var parseResult = ParseResult()
         var args = ["--mychoice","a"]
         try! option.parse(&args, accumulateResult: &parseResult)
-        XCTAssert(parseResult["mychoice"]!.stringValue! == "a")
+        XCTAssert(parseResult["mychoice"].stringValue == "a")
     }
     
     func testChoiceBadOption() {

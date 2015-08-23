@@ -41,6 +41,6 @@ class ArgsMatchTestsTests : XCTestCase {
         let result = try! metaParser.parse(["createFISA","--identityDescription","shadowfax is the best computer ever",
             "--fisaFile", "/tmp/test.fisa",
             "--identityFile","/tmp/identity.fisa"])
-        XCTAssert(result["identityFile"]! == "/tmp/identity.fisa")
+        XCTAssert(result["identityFile"] == "/tmp/identity.fisa")
     }
 }

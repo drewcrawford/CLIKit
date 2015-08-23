@@ -74,7 +74,7 @@ public final class ChoiceOption : Option {
         h += "."
         if let d = defaultValue {
             h += "\n"
-            h += "The default value is \(d.stringValue!)."
+            h += "The default value is \(d.stringValue)."
         }
         return h
     }

@@ -23,7 +23,8 @@ import Foundation
 public enum OptionType {
     case StringOption(String)
     
-    public var stringValue: String? {
+    /**If you call .stringValue on something that's an int, we're calling that programmer error.*/
+    public var stringValue: String {
         get {
             switch(self){
             case .StringOption(let str):
@@ -83,7 +84,7 @@ extension Option {
             helpStr += ": "
             helpStr += shortHelp
             if self.defaultValue != nil {
-                helpStr += "\nThe default value is \(defaultValue!.stringValue!)."
+                helpStr += "\nThe default value is \(defaultValue!.stringValue)."
             }
             return helpStr
         }

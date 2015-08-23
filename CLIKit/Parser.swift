@@ -41,9 +41,11 @@ This way you ensure you don't have typos in your parsing logic.
 */
 public struct ParseResult {
     private var innerDict : [String: OptionType] = [:]
-    public subscript(key: String) -> OptionType? {
+    /**
+- return: a non-optional.  If you're looking for a key that doesn't exist, that's programmer error. */
+    public subscript(key: String) -> OptionType {
         get {
-            return innerDict[key]
+            return innerDict[key]!
         }
         set {
             innerDict[key] = newValue

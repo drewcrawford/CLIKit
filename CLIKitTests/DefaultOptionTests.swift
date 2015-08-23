@@ -38,7 +38,7 @@ class DefaultOptionTests : XCTestCase {
     func testDefaultOptions() {
         let cmd = CreateFISACommand()
         let results = try! cmd.parser.parse(["createFISA", "--identityFile","whatever","--identityDescription","whatever"])
-        XCTAssert(results["fisaFile"]! == "DefaultFISAFile")
+        XCTAssert(results["fisaFile"] == "DefaultFISAFile")
     }
     
     func testOptionHelp() {
