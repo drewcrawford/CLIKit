@@ -18,8 +18,10 @@ command.command(result)
 
 # Features
 
-* Automatically builds usage / help
-* Automatically displays required legal notices
+* The best help and usage strings you've ever seen, guaranteed™
+* Automatic support for required legal notices
+* Support for default values and optional arguments
+* Security features so your passwords don't end up in bash history accidentally
 
 # Install
 
