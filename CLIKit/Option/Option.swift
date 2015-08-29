@@ -22,22 +22,42 @@ import Foundation
 
 public enum OptionType {
     case StringOption(String)
+    case NotPresent //indicates the option wasn't present.  Typically used for optional options.
     
-    /**If you call .stringValue on something that's an int, we're calling that programmer error.*/
+    /**If you call .stringValue on something that's an int, we're calling that programmer error.
+If you don't know if the user passed this option (e.g., if required == false), use maybeStringValue? instead.
+- note: This function is non-optional because 90% of the time, you're dealing with non-optional stringValues and you don't want bangs everywhere.  Only if you're using optional options, should you upgrade to maybeStringValue.
+    */
     public var stringValue: String {
         get {
             switch(self){
             case .StringOption(let str):
                 return str
+            default:
+                abort()
             }
         }
     }
+/** Gets the string value if the user passed an option, or else nil.*/
+    public var maybeStringValue: String? {
+        get {
+            switch(self) {
+            case.StringOption(let str):
+                return str
+            case .NotPresent:
+                return nil
+            }
+        }
+    }
+    
 }
 
 public func ==(lhs: OptionType, rhs: String) -> Bool {
     switch(lhs) {
     case .StringOption(let str):
         return str == rhs
+    case .NotPresent:
+        return false
     }
 }
 
@@ -78,7 +98,7 @@ extension Option {
     public var longHelp : String {
         get {
             var helpStr = "\(longName)"
-            if self.defaultValue != nil {
+            if self.defaultValue != nil || !self.required {
                 helpStr += " (optional)"
             }
             helpStr += ": "

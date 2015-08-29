@@ -25,7 +25,7 @@ public final class DefaultOption: Option {
     public let longName: String
     public let shortHelp: String
     
-    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = false) {
+    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = true) {
         self.required = required
         self.defaultValue = defaultValue
         self.longName = longName
@@ -36,7 +36,13 @@ public final class DefaultOption: Option {
         let idx = args.indexOf("--\(longName)")
         guard let index = idx else {
             //is there a default value?
-            guard let d = defaultValue else { throw ParseError.OptionMissing(self) }
+            guard let d = defaultValue else {
+                //is the option optional?
+                if !required {
+                    accumulateResult[longName] = OptionType.NotPresent
+                    return
+                }
+                throw ParseError.OptionMissing(self) }
             accumulateResult[longName] = d
             return
         }
