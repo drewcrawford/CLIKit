@@ -25,14 +25,11 @@ public final class SecureOption: Option {
     public let required: Bool
     public let longName: String
     public let shortHelp: String
-    #if ENABLE_TESTING
-    private let value_for_unit_testing: Any!
-    #endif
     
-    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = false, value_for_unit_testing: Any! = nil) {
-        #if ENABLE_TESTING
-            self.value_for_unit_testing = value_for_unit_testing
-        #endif
+    /**
+- parameter defaultValue: Be aware that if you pass a default value here, the user will not be prompted.  This is specific to SecureOption.  While the normal options are often overridden by the user, in the SecureOption case, the defaultValue is often used in cases where we can't prompt the user interactively, such as unit tests and build servers.
+*/
+    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = false) {
         self.required = required
         self.defaultValue = defaultValue
         self.longName = longName
@@ -40,12 +37,10 @@ public final class SecureOption: Option {
     }
     
     public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
-        #if ENABLE_TESTING
-            if value_for_unit_testing != nil {
-                accumulateResult[longName] = OptionType.StringOption(value_for_unit_testing as! String) //<U+1F41E> support more types
-                return
-            }
-        #endif
+        if let dv = self.defaultValue {
+            accumulateResult[longName] = dv
+            return
+        }
         let value = getpass("Enter \(longName):")
         let strValue = String(CString: value, encoding: NSUTF8StringEncoding)!
         accumulateResult[longName] = OptionType.StringOption(strValue)
