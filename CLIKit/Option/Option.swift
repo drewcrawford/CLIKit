@@ -21,6 +21,7 @@
 import Foundation
 
 public enum OptionType {
+    case IntOption(Int)
     case StringOption(String)
     case NotPresent //indicates the option wasn't present.  Typically used for optional options.
     
@@ -46,10 +47,24 @@ If you don't know if the user passed this option (e.g., if required == false), u
                 return str
             case .NotPresent:
                 return nil
+            case .IntOption:
+                preconditionFailure("Don't use maybeStringValue for an int option.")
             }
         }
     }
     
+    public var intValue: Int {
+        get {
+            switch(self) {
+            case .IntOption(let int):
+                return int
+            default:
+                preconditionFailure("No int available")
+            }
+        }
+    }
+    
+    //todo: maybeIntValue?
 }
 
 public func ==(lhs: OptionType, rhs: String) -> Bool {
@@ -57,6 +72,8 @@ public func ==(lhs: OptionType, rhs: String) -> Bool {
     case .StringOption(let str):
         return str == rhs
     case .NotPresent:
+        return false
+    case .IntOption:
         return false
     }
 }
@@ -88,12 +105,20 @@ public protocol Option {
     /**A more detailed help for the option.  This might include information about default values, remarks, etc. */
     var longHelp: String { get }
     
+    /**A prototype for what type this option will hold.  The defualt is StringOption. */
+    var type : OptionType { get }
+    
     func parse(inout args: [String], inout accumulateResult: ParseResult) throws
 }
 
 extension Option {
     public var usageHelp: String {
         return "--\(longName) [\(longName)]"
+    }
+    public var type: OptionType {
+        get {
+            return OptionType.StringOption("")
+        }
     }
     public var longHelp : String {
         get {

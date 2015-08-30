@@ -43,6 +43,12 @@ public final class SecureOption: Option {
         }
         let value = getpass("Enter \(longName):")
         let strValue = String(CString: value, encoding: NSUTF8StringEncoding)!
+        switch(type) {
+        case .StringOption:
+            break
+        default:
+            preconditionFailure("Not implemented for type \(type)")
+        }
         accumulateResult[longName] = OptionType.StringOption(strValue)
     }
 }

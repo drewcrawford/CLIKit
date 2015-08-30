@@ -24,12 +24,14 @@ public final class DefaultOption: Option {
     public let required: Bool
     public let longName: String
     public let shortHelp: String
+    public let type : OptionType
     
-    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = true) {
+    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = true, type: OptionType = OptionType.StringOption("")) {
         self.required = required
         self.defaultValue = defaultValue
         self.longName = longName
         self.shortHelp = help
+        self.type = type
     }
     
     public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
@@ -49,6 +51,14 @@ public final class DefaultOption: Option {
         args.removeAtIndex(index) //remove --whatever
         let value = args[index]
         args.removeAtIndex(index) //remove value itself
-        accumulateResult[longName] = OptionType.StringOption(value)
+        switch(type) {
+        case .StringOption:
+            accumulateResult[longName] = OptionType.StringOption(value)
+        case .IntOption:
+            guard let i = Int(value) else { throw ParseError.NotInt(value) }
+            accumulateResult[longName] = OptionType.IntOption(i)
+        default:
+            preconditionFailure("Not implemented for type \(type)")
+        }
     }
 }
