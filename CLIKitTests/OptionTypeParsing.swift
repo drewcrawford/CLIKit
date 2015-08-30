@@ -18,4 +18,12 @@ class OptionTypeParsingTests : XCTestCase {
         try! option.parse(&args, accumulateResult: &parseResult)
         XCTAssert(parseResult["int"].intValue == 2)
     }
+    
+    func testIntParseDefault() {
+        let option = DefaultOption(longName: "int", help: "Some int", type: OptionType.IntOption(0), defaultValue: OptionType.IntOption(2))
+        var parseResult = ParseResult()
+        var args: [String] = []
+        try! option.parse(&args, accumulateResult: &parseResult)
+        XCTAssert(parseResult["int"].intValue == 2)
+    }
 }
