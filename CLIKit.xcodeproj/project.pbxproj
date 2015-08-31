@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A0829481B930EF500A40FEF /* OptionTypeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */; settings = {ASSET_TAGS = (); }; };
+		3A137EBD1B9403BC0068F16B /* PrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A137EBC1B9403BC0068F16B /* PrintTests.swift */; settings = {ASSET_TAGS = (); }; };
 		3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */; };
 		3A2AAADB1B7892E500C566B1 /* CLIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2AAADA1B7892E500C566B1 /* CLIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A2AAAE21B7892E500C566B1 /* CLIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2AAAD71B7892E500C566B1 /* CLIKit.framework */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTypeParsing.swift; sourceTree = "<group>"; };
+		3A137EBC1B9403BC0068F16B /* PrintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintTests.swift; sourceTree = "<group>"; };
 		3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDontCrashWithNoArgs.swift; sourceTree = "<group>"; };
 		3A2AAAD71B7892E500C566B1 /* CLIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2AAADA1B7892E500C566B1 /* CLIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLIKit.h; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				3A4D79CD1B89368A0031F1AE /* ChoiceOptionTests.swift */,
 				3A8CF8B51B9144C500B8E720 /* OptionalArguments.swift */,
 				3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */,
+				3A137EBC1B9403BC0068F16B /* PrintTests.swift */,
 			);
 			path = CLIKitTests;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				3A30A10E1B83E8CB007BF212 /* LegalTests.swift in Sources */,
 				3A30A10A1B822452007BF212 /* MissingOptionTests.swift in Sources */,
 				3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */,
+				3A137EBD1B9403BC0068F16B /* PrintTests.swift in Sources */,
 				3AC49A591B868E0200B8237E /* HelpTests.swift in Sources */,
 				3A8CF8B61B9144C500B8E720 /* OptionalArguments.swift in Sources */,
 				3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */,

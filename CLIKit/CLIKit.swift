@@ -47,3 +47,13 @@ extension ErrorType {
         return "\(self)"
     }
 }
+
+
+public func printErr(items: Any...) {
+    //this monstrosity to work around 📡22495195
+    var joined = items.reduce("") { (accumulator, element) -> String in
+        return accumulator + " \(element)"
+    }
+    joined.removeAtIndex(joined.characters.indices.startIndex)
+    fputs(joined+"\n", stderr)
+}
