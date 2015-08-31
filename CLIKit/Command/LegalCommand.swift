@@ -19,7 +19,11 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
-/**A command that outputs legal text. */
+/**A command that outputs legal text.
+
+This command looks for files called NOTICE or LICENSE, in the current bundle and its frameworks.  It outputs those notices to standard out.
+This command is installed by default on all new MetaCommands.
+*/
 final class LegalCommand : EasyCommand {
     let name = "legal"
     let options : [Option] = []

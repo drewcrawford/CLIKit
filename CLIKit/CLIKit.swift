@@ -20,13 +20,21 @@
 
 import Foundation
 
+/**An error occurred while parsing command line arguments */
 enum ParseError : ErrorType {
+    ///The user did not specify an option
     case OptionMissing(Option)
+    ///A command is being routed to a parser that does not want to handle it
     case NotThisCommand
+    ///No subparser can match the arguments
     case NoParserMatched
+    ///A subparser failed to parse the arguments.  More information may be found in the associated values
     case InnerParserFailed(ErrorType, Parser)
+    ///The user indicated that they want help, so parsing should not continue.
     case UserWantsHelp
+    ///The user chose an option in the first associated value, but we expected a choice from the second associated value
     case UnknownChoice(String, [String])
+    ///This is an `Int` option, but the text passed to the parser is not an integer.
     case NotInt(String)
     
     var 📡_22310636Description: String {
@@ -48,7 +56,7 @@ extension ErrorType {
     }
 }
 
-
+/**Prints text to the standard error. */
 public func printErr(items: Any...) {
     //this monstrosity to work around 📡22495195
     var joined = items.reduce("") { (accumulator, element) -> String in

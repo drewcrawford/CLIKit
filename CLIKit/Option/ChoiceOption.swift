@@ -19,6 +19,8 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
+
+/**An option that allows the user to pick from several choices (multiple-choice). */
 public final class ChoiceOption : Option {
     public let defaultValue: OptionType?
     public let required: Bool = true
@@ -41,7 +43,14 @@ public final class ChoiceOption : Option {
         accumulateResult[longName] = OptionType.StringOption(choice)
     }
     
-    /**This constructor uses strings for choices due to 📡22393113 */
+    /**
+Construct a new ChoiceOption.
+- parameters:
+    - longName: The long name of the option, e.g. `--myLongName`
+    - shortHelp: A one-line help for the option
+    - choices: An array of choice strings
+    - defaultValue: A default value for the choice, allowing the user to omit the option.
+- bug: This constructor uses strings for choices due to 📡22393113 */
     public init(longName:String, shortHelp: String, choices: [String], defaultValue:OptionType? = nil) {
         self.longName = longName
         self.shortHelp = shortHelp

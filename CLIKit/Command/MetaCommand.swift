@@ -20,7 +20,8 @@
 
 import Foundation
 /**A command that picks exactly one of several subcommands. This is ordinarily the top-level command for most programs.
-- note: A command called "legal" is automatically added to MetaCommands.  The "legal" command displays NOTICE or LICENSE files for the bundle or any frameworks for the executable. */
+- note: A command called "legal" is automatically added to `MetaCommand`s.  The "legal" command displays `NOTICE` or `LICENSE` files for the bundle or any frameworks for the executable.
+- note: A version command is automatically added to `MetaCommand`s.*/
 public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
     
     private let subcommands: [Command]

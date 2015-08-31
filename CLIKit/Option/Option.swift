@@ -20,13 +20,21 @@
 
 import Foundation
 
+/**Indicates the type of the option. */
 public enum OptionType {
+    ///An int
     case IntOption(Int)
+    ///A string
     case StringOption(String)
-    case NotPresent //indicates the option wasn't present.  Typically used for optional options.
+    ///indicates the option wasn't present.  Typically used for optional options.
+    case NotPresent
     
-    /**If you call .stringValue on something that's an int, we're calling that programmer error.
-If you don't know if the user passed this option (e.g., if required == false), use maybeStringValue? instead.
+    /**
+    
+Get the option as a `String`.
+    
+- note: If you call `.stringValue` on something that's an `Int`, we're calling that programmer error.
+If you don't know if the user passed this option (e.g., if `required == false`), use `maybeStringValue?` instead.
 - note: This function is non-optional because 90% of the time, you're dealing with non-optional stringValues and you don't want bangs everywhere.  Only if you're using optional options, should you upgrade to maybeStringValue.
     */
     public var stringValue: String {
@@ -53,6 +61,12 @@ If you don't know if the user passed this option (e.g., if required == false), u
         }
     }
     
+/**Get the option as an `Int`.
+
+- note: If you call `.intValue` on something that's a `String`, we're calling that programmer error.
+- note: This function is non-optional because 90% of the time, you're dealing with non-optional stringValues and you don't want bangs everywhere.  Only if you're using optional options, should you upgrade to `maybeIntValue`.
+- bug: There is no `maybeIntValue`.
+*/
     public var intValue: Int {
         get {
             switch(self) {
@@ -95,8 +109,11 @@ extension OptionType : StringLiteralConvertible {
 }
 
 public protocol Option {
+    /**The default value for the option.  Setting a default value means the user can omit specifying an explicit value. */
     var defaultValue: OptionType? { get }
+    /**Whether the option is required.  Note that, if `defaultValue != nil`, using `required: false` is not sensible. */
     var required: Bool { get }
+    /** The long name for the option. */
     var longName: String { get }
     /**A one-line help for the option */
     var shortHelp: String { get }

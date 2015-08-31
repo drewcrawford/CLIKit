@@ -19,7 +19,7 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
-/**An option for a secure field.  This kind of option cannot be passed as a command line argument.  Provide the default value or the user will be interactively prompted. */
+/**An option for a secure field.  This kind of option cannot be passed as a command line argument, since then it would be listed in your `.bash_history`.  Provide the default value or the user will be interactively prompted. */
 public final class SecureOption: Option {
     public let defaultValue: OptionType?
     public let required: Bool
@@ -27,7 +27,12 @@ public final class SecureOption: Option {
     public let shortHelp: String
     
     /**
-- parameter defaultValue: Be aware that if you pass a default value here, the user will not be prompted.  This is specific to SecureOption.  While the normal options are often overridden by the user, in the SecureOption case, the defaultValue is often used in cases where we can't prompt the user interactively, such as unit tests and build servers.
+Create a new SecureOption.
+- parameters:
+    - longName: The long name of the option, e.g. `--myLongName`
+    - help: A one-line help for the option
+    - defaultValue: Be aware that if you pass a default value here, the user will not be prompted.  This is specific to `SecureOption`.  While the `DefaultOption`s are often overridden by the user, in the `SecureOption` case, the defaultValue is often used in cases where we can't prompt the user interactively, such as unit tests and build servers.
+    - required: Whether the option is required.  If `defaultValue != nil`, `required: true` is not sensible.
 */
     public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = false) {
         self.required = required

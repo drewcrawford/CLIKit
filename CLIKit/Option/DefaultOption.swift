@@ -19,6 +19,8 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
+
+/**An option on the command line (e.g., --something). */
 public final class DefaultOption: Option {
     public let defaultValue: OptionType?
     public let required: Bool
@@ -26,6 +28,13 @@ public final class DefaultOption: Option {
     public let shortHelp: String
     public let type : OptionType
     
+    /**Creates a new option.
+- parameters:
+    - longName: The long name for the option (e.g. `--myLongName`)
+    - defaultValue: A default value for the option, if the user does not specify a value.
+    - required: Whether a value for this option is required, or whether it is optional.  Note that, if `defaultValue != nil`, using `required: false` is not sensible.
+    - type: The type of option.  Use `OptionType.StringType("")` to indicate we expect a `String` or `OptionType.IntType(0)` to indicate we expect an `Int`.
+*/
     public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = true, type: OptionType = OptionType.StringOption("")) {
         self.required = required
         self.defaultValue = defaultValue

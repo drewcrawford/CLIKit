@@ -40,14 +40,14 @@ extension EasyCommand {
 
 /**A parser that tries to match against a particular command string.
 - note: You probably want to use EasyCommand instead of working with this class directly. */
-public final class CommandParser: Parser {
-    public var options: [Option]
-    public var name: String
-    public var aliases: [String]
-    public var shortHelp: String
+internal final class CommandParser: Parser {
+    var options: [Option]
+    var name: String
+    var aliases: [String]
+    var shortHelp: String
     
     private let innerParser: DefaultParser
-    public init(name: String, options: [Option], help: String, aliases: [String] = []) {
+    init(name: String, options: [Option], help: String, aliases: [String] = []) {
         self.name = name
         self.options = options
         self.innerParser = DefaultParser(name: name, options: options)
@@ -55,7 +55,7 @@ public final class CommandParser: Parser {
         self.aliases = aliases
     }
     
-    public func handlesArguments(args: [String]) -> Bool {
+    func handlesArguments(args: [String]) -> Bool {
         var allAliases = aliases
         allAliases.append(name)
         for alias in allAliases {
@@ -64,14 +64,14 @@ public final class CommandParser: Parser {
         return false
     }
     
-    public func _parse(args: [String]) throws -> ParseResult {
+    func _parse(args: [String]) throws -> ParseResult {
         if !handlesArguments(args) {
             throw ParseError.NotThisCommand
         }
         let newArgs = [String](args[1..<args.count]) //lop off the command name
         return try self.innerParser.parse(newArgs)
     }
-    public var longHelp : String { get {
+    var longHelp : String { get {
         var usageStr = "\(self.name)"
         for option in self.options {
             usageStr += " \(option.usageHelp)"

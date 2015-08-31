@@ -19,7 +19,7 @@
 //  language governing rights and limitations under the RPL.
 
 import Foundation
-
+/**A command that displays version information */
 final class VersionCommand : EasyCommand {
     let name = "version"
     let options : [Option] = []

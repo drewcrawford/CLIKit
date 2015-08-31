@@ -22,10 +22,10 @@ import Foundation
 
 /**A type that holds the result of the parse.  The result is subscriptable.
 
-- note: It's recommended that you use strongly-typed keys where possible.  Thus you could create
+- note: It's recommended that you use strngly-typed keys where possible.  Thus you could create
 
 ```
-enum StronglyTyped: String {
+enum StringlyTyped: String {
     case MyKey = "MyKey"
     case MyKey2 = "MyKey2"
 }
@@ -42,7 +42,7 @@ This way you ensure you don't have typos in your parsing logic.
 public struct ParseResult {
     private var innerDict : [String: OptionType] = [:]
     /**
-- return: a non-optional.  If you're looking for a key that doesn't exist, that's programmer error. */
+- returns: a non-optional.  If you're looking for a key that doesn't exist, that's programmer error. */
     public subscript(key: String) -> OptionType {
         get {
             return innerDict[key]!
@@ -65,11 +65,11 @@ public protocol Parser {
     var longHelp: String { get }
     
     /**Determines if the parser handles the arguments.  The default implementation attempts a parse, and returns false if the parse fails.
-- discussion: This is used inside the CommandParser to indicate whether the command matches the input.  That way if the command matches, but some argument fails, we return an error to the user from the parser that handled the arguments. */
+- discussion: This is used inside the `CommandParser` to indicate whether the command matches the input.  That way if the command matches, but some argument fails, we return an error to the user from the parser that handled the arguments. */
     func handlesArguments(args: [String]) -> Bool
     
-    /**Returns the best parser candidate for the given arguments.  The default implementation returns the receiver.
-- discussion: With metaparsers, returning a child object here may yield better error/help messages.*/
+    /**- returns: the best parser candidate for the given arguments.  The default implementation returns the receiver.
+- note: With metaparsers, returning a child object here may yield better error/help messages.*/
     func underlyingParser(args: [String]) -> Parser
 }
 public extension Parser {
