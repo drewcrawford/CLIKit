@@ -19,9 +19,11 @@ command.command(result)
 # Features
 
 * The best help and usage strings you've ever seen, guaranteed™
-* Automatic support for required legal notices
+* Automatic support for version reporting and required legal notices
 * Support for default values and optional arguments
 * Security features so your passwords don't end up in bash history accidentally
+* Multiple choice options
+* Much more!
 
 # Install
 
@@ -30,10 +32,12 @@ command.command(result)
 add
 
 ```
-git "https://code.sealedabstract.com/drewcrawford/CLIKit.git" "master"
+git "https://code.sealedabstract.com/drewcrawford/CLIKit.git"
 ```
 
 to your Cartfile.
+
+You can also download an [official binary release](https://clikit.s3.amazonaws.com/files.html)
 
 # Mailing list
 
