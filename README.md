@@ -41,7 +41,7 @@ You can also download an [official binary release](https://clikit.s3.amazonaws.c
 
 # Mailing list
 
-We use [code.sa](http://discuss.sealedabstract.com/c/code-sa/clikit)
+We use [discuss.sa](http://discuss.sealedabstract.com/c/code-sa/clikit)
 
 # License
 
