@@ -449,6 +449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dca.CLIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
