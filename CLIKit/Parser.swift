@@ -18,8 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
-
 /**A type that holds the result of the parse.  The result is subscriptable.
 
 - note: It's recommended that you use strngly-typed keys where possible.  Thus you could create

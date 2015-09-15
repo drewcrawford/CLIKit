@@ -18,8 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
-
 /**An option on the command line (e.g., --something). */
 public final class DefaultOption: Option {
     public let defaultValue: OptionType?

@@ -18,8 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
-
 /**Implement this to create a command easily. */
 public protocol EasyCommand: CLIKit.Command {
     /**The name of your command */

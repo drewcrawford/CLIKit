@@ -18,8 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
-
 /**Indicates the type of the option. */
 public enum OptionType {
     ///An int

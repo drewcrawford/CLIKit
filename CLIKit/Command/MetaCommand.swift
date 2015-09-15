@@ -18,7 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
 /**A command that picks exactly one of several subcommands. This is ordinarily the top-level command for most programs.
 - note: A command called "legal" is automatically added to `MetaCommand`s.  The "legal" command displays `NOTICE` or `LICENSE` files for the bundle or any frameworks for the executable.
 - note: A version command is automatically added to `MetaCommand`s.*/

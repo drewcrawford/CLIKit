@@ -18,8 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
-
 /**An error occurred while parsing command line arguments */
 enum ParseError : ErrorType {
     ///The user did not specify an option

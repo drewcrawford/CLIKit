@@ -18,7 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
 
 /**An option that allows the user to pick from several choices (multiple-choice). */
 public final class ChoiceOption : Option {

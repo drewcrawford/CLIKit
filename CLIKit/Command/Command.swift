@@ -18,8 +18,6 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import Foundation
-
 /**The command protocol.
 - note: You probably don't want to implement this directly; instead consider implementing EasyCommand. */
 public protocol Command {
