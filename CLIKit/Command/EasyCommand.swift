@@ -31,7 +31,7 @@ public protocol EasyCommand: CLIKit.Command {
 }
 
 extension EasyCommand {
-    public var requiresCommandString: Bool { return false }
+    public var requiresCommandString: Bool { return true }
 }
 
 extension EasyCommand {

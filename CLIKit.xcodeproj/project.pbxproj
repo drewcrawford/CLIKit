@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A0829481B930EF500A40FEF /* OptionTypeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */; };
+		3A10E78F1C163A2000C6E896 /* MetaCommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10E78E1C163A2000C6E896 /* MetaCommandTests.swift */; };
 		3A137EBD1B9403BC0068F16B /* PrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A137EBC1B9403BC0068F16B /* PrintTests.swift */; };
 		3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */; };
 		3A1DE4721C156B6200F8A05C /* ReadMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1DE4711C156B6200F8A05C /* ReadMeTests.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTypeParsing.swift; sourceTree = "<group>"; };
+		3A10E78E1C163A2000C6E896 /* MetaCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaCommandTests.swift; sourceTree = "<group>"; };
 		3A137EBC1B9403BC0068F16B /* PrintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintTests.swift; sourceTree = "<group>"; };
 		3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDontCrashWithNoArgs.swift; sourceTree = "<group>"; };
 		3A1DE4711C156B6200F8A05C /* ReadMeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadMeTests.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */,
 				3A137EBC1B9403BC0068F16B /* PrintTests.swift */,
 				3A1DE4711C156B6200F8A05C /* ReadMeTests.swift */,
+				3A10E78E1C163A2000C6E896 /* MetaCommandTests.swift */,
 			);
 			path = CLIKitTests;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */,
 				3A137EBD1B9403BC0068F16B /* PrintTests.swift in Sources */,
 				3AC49A591B868E0200B8237E /* HelpTests.swift in Sources */,
+				3A10E78F1C163A2000C6E896 /* MetaCommandTests.swift in Sources */,
 				3A8CF8B61B9144C500B8E720 /* OptionalArguments.swift in Sources */,
 				3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */,
 				3A0829481B930EF500A40FEF /* OptionTypeParsing.swift in Sources */,
