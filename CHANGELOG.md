@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project does not follow semver.
 
+# 1.2.1 - 2015-12-07
+
+* Fixing an issue where a MetaCommand might unexpectedly try to parse the wrong command.
+
 # 1.2 - 2015-12-07
 
 * Update to Xcode 7.1.1
