@@ -4,16 +4,21 @@ CLIKit is an advanced, intuitive command-line parsing library for Swift programs
 
 ```swift
 private final class MyGreatCommand : CLIKit.EasyCommand {
-    private let options : [Option] = [DefaultOption(longName: "myOption", help: "Help for this option")
+    private let options : [Option] = [DefaultOption(longName: "myOption", help: "Help for this option")]
     private let shortHelp = "Help for this command"
     let name = "myGreatCommand"
+    let requiresCommandString = false
     private func command(parseResult: ParseResult) {
         //todo command logic here
     }
 }
 
-let result = command.parser.parseArguments()
-command.command(result)
+private let command = MyGreatCommand()
+
+guard let r  = command.parser.parseArguments() else {
+    exit(1)
+}
+command.command(r)
 ```
 
 # Features

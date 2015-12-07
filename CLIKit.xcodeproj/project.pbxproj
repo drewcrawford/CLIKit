@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0829481B930EF500A40FEF /* OptionTypeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */; settings = {ASSET_TAGS = (); }; };
-		3A137EBD1B9403BC0068F16B /* PrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A137EBC1B9403BC0068F16B /* PrintTests.swift */; settings = {ASSET_TAGS = (); }; };
+		3A0829481B930EF500A40FEF /* OptionTypeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */; };
+		3A137EBD1B9403BC0068F16B /* PrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A137EBC1B9403BC0068F16B /* PrintTests.swift */; };
 		3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */; };
+		3A1DE4721C156B6200F8A05C /* ReadMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1DE4711C156B6200F8A05C /* ReadMeTests.swift */; };
 		3A2AAADB1B7892E500C566B1 /* CLIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2AAADA1B7892E500C566B1 /* CLIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A2AAAE21B7892E500C566B1 /* CLIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2AAAD71B7892E500C566B1 /* CLIKit.framework */; };
 		3A2AAAFB1B78931F00C566B1 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAAFA1B78931F00C566B1 /* Parser.swift */; };
@@ -22,7 +23,7 @@
 		3A30A1161B83F098007BF212 /* MetaCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30A1151B83F098007BF212 /* MetaCommand.swift */; };
 		3A30A1181B83F0CB007BF212 /* EasyCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30A1171B83F0CB007BF212 /* EasyCommand.swift */; };
 		3A4D79CE1B89368A0031F1AE /* ChoiceOptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D79CD1B89368A0031F1AE /* ChoiceOptionTests.swift */; };
-		3A8CF8B61B9144C500B8E720 /* OptionalArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8CF8B51B9144C500B8E720 /* OptionalArguments.swift */; settings = {ASSET_TAGS = (); }; };
+		3A8CF8B61B9144C500B8E720 /* OptionalArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8CF8B51B9144C500B8E720 /* OptionalArguments.swift */; };
 		3AAAC5361B7E3388009431FC /* CJDerivedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAC5351B7E3388009431FC /* CJDerivedTests.swift */; };
 		3ABA63301B8671660028FCC2 /* DefaultOptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA632F1B8671660028FCC2 /* DefaultOptionTests.swift */; };
 		3AC49A551B86827200B8237E /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC49A541B86827200B8237E /* VersionCommand.swift */; };
@@ -50,6 +51,7 @@
 		3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTypeParsing.swift; sourceTree = "<group>"; };
 		3A137EBC1B9403BC0068F16B /* PrintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintTests.swift; sourceTree = "<group>"; };
 		3A1922751B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDontCrashWithNoArgs.swift; sourceTree = "<group>"; };
+		3A1DE4711C156B6200F8A05C /* ReadMeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadMeTests.swift; sourceTree = "<group>"; };
 		3A2AAAD71B7892E500C566B1 /* CLIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2AAADA1B7892E500C566B1 /* CLIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLIKit.h; sourceTree = "<group>"; };
 		3A2AAADC1B7892E500C566B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				3A8CF8B51B9144C500B8E720 /* OptionalArguments.swift */,
 				3A0829471B930EF500A40FEF /* OptionTypeParsing.swift */,
 				3A137EBC1B9403BC0068F16B /* PrintTests.swift */,
+				3A1DE4711C156B6200F8A05C /* ReadMeTests.swift */,
 			);
 			path = CLIKitTests;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			files = (
 				3A30A10C1B8263AC007BF212 /* ArgsMatchTests.swift in Sources */,
 				3A1922761B8169E60092C6B1 /* TestDontCrashWithNoArgs.swift in Sources */,
+				3A1DE4721C156B6200F8A05C /* ReadMeTests.swift in Sources */,
 				3AC49A571B86865200B8237E /* VersionCommandTests.swift in Sources */,
 				3A4D79CE1B89368A0031F1AE /* ChoiceOptionTests.swift in Sources */,
 				3A30A10E1B83E8CB007BF212 /* LegalTests.swift in Sources */,

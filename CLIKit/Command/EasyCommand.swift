@@ -26,12 +26,18 @@ public protocol EasyCommand: CLIKit.Command {
     var options: [Option] { get }
     /**A short, one-line help string that describes what your command does.*/
     var shortHelp: String { get }
+    /**Setting this to false indicates the command string is not required to be present.  This may be useful if the EasyCommand is at the top of the parse hierarchy. */
+    var requiresCommandString: Bool { get }
+}
+
+extension EasyCommand {
+    var requiresCommandString: Bool { return false }
 }
 
 extension EasyCommand {
     public var parser: Parser {
         get {
-            return CommandParser(name: self.name, options: self.options, help: self.shortHelp, aliases: self.aliases)
+            return CommandParser(name: self.name, options: self.options, help: self.shortHelp, aliases: self.aliases, requiresCommandString: requiresCommandString)
         }
     }
 }
@@ -43,30 +49,40 @@ internal final class CommandParser: Parser {
     var name: String
     var aliases: [String]
     var shortHelp: String
+    var requiresCommandString: Bool //setting this to false means we handle the arguments regardless
     
     private let innerParser: DefaultParser
-    init(name: String, options: [Option], help: String, aliases: [String] = []) {
+    init(name: String, options: [Option], help: String, aliases: [String] = [], requiresCommandString: Bool = true) {
         self.name = name
         self.options = options
         self.innerParser = DefaultParser(name: name, options: options)
         self.shortHelp = help
         self.aliases = aliases
+        self.requiresCommandString = requiresCommandString
     }
     
     func handlesArguments(args: [String]) -> Bool {
-        var allAliases = aliases
-        allAliases.append(name)
-        for alias in allAliases {
-            if alias == args[0] { return true}
+        if requiresCommandString {
+            var allAliases = aliases
+            allAliases.append(name)
+            if args.count == 0 { return false }
+            for alias in allAliases {
+                if alias == args[0] { return true}
+            }
+            return false
         }
-        return false
+        else { return true }
     }
     
     func _parse(args: [String]) throws -> ParseResult {
         if !handlesArguments(args) {
             throw ParseError.NotThisCommand
         }
-        let newArgs = [String](args[1..<args.count]) //lop off the command name
+        let newArgs: [String]
+        if requiresCommandString {
+            newArgs = [String](args[1..<args.count]) //lop off the command name
+        }
+        else { newArgs = args }
         return try self.innerParser.parse(newArgs)
     }
     var longHelp : String { get {
