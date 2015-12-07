@@ -42,7 +42,7 @@ git "https://code.sealedabstract.com/drewcrawford/CLIKit.git"
 
 to your Cartfile.
 
-You can also download an [official binary release](https://clikit.s3.amazonaws.com/files.html)
+You can also download an [official binary release](https://code.sealedabstract.com/drewcrawford/CLIKit/tags)
 
 # Mailing list
 
@@ -50,6 +50,4 @@ We use [discuss.sa](http://discuss.sealedabstract.com/c/code-sa/clikit)
 
 # License
 
-This software is licensed under an open-source strong copyleft license, the [RPL](http://opensource.org/licenses/RPL-1.5).  If that doesn't work for you, commercial licensing is available from the [author](drew@sealedabstract.com).  
-
-
+This software is licensed under an open-source strong copyleft license, the [RPL](http://opensource.org/licenses/RPL-1.5).  If that doesn't work for you, commercial licensing is available from the [author](drew@sealedabstract.com).
