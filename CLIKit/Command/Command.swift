@@ -22,7 +22,7 @@
 - note: You probably don't want to implement this directly; instead consider implementing EasyCommand. */
 public protocol Command {
     /**The command's parser.  Ordinarily this is a `CommandParser`. */
-    var parser: CLIKit.Parser { get }
+    var parser: Parser { get }
     /**A function to run when the command is selected.
 - parameter parseResult: The result we parsed for this command */
     func command(_ parseResult: ParseResult)

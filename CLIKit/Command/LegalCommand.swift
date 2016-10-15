@@ -23,6 +23,7 @@
 This command looks for files called NOTICE or LICENSE, in the current bundle and its frameworks.  It outputs those notices to standard out.
 This command is installed by default on all new MetaCommands.
 */
+import Foundation
 final class LegalCommand : EasyCommand {
     let name = "legal"
     let options : [Option] = []

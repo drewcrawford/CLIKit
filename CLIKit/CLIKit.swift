@@ -17,7 +17,7 @@
 //  LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
-
+import Foundation
 /**An error occurred while parsing command line arguments */
 enum ParseError : Error {
     ///The user did not specify an option

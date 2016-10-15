@@ -19,7 +19,7 @@
 //  language governing rights and limitations under the RPL.
 
 /**Implement this to create a command easily. */
-public protocol EasyCommand: CLIKit.Command {
+public protocol EasyCommand: Command {
     /**The name of your command */
     var name: String { get }
     /**The options your command supports */

@@ -21,11 +21,11 @@
 /**A command that picks exactly one of several subcommands. This is ordinarily the top-level command for most programs.
 - note: A command called "legal" is automatically added to `MetaCommand`s.  The "legal" command displays `NOTICE` or `LICENSE` files for the bundle or any frameworks for the executable.
 - note: A version command is automatically added to `MetaCommand`s.*/
-public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
+public final class MetaCommand : Command, Parser {
     
     fileprivate let subcommands: [Command]
     public let name: String
-    public var parser: CLIKit.Parser {
+    public var parser: Parser {
         get {
             return self
         }
