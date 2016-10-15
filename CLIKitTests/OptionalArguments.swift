@@ -25,7 +25,7 @@ class OptionalArgumentsTests : XCTestCase {
     func testOptional() {
         let o = DefaultOption(longName: "myname", help: "myhelp", required: false)
         let parser = DefaultParser(name: "myparser", options: [o])
-        try! parser.parse([])
+        let _ = try! parser.parse([])
     }
     
     func testOptionalHelp() {

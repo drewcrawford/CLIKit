@@ -46,7 +46,7 @@ class MetaCommantTests : XCTestCase {
         //that appears second in the creation order
         //this exhibits a bug in 1.3 related to requiresCommandString.
         let meta = MetaCommand(name: "myMeta", subcommands: [MyGreatCommand(),MyGreatCommand2()])
-        try! meta.parse(["myGreatCommand2"])
+        let _ = try! meta.parse(["myGreatCommand2"])
     }
 }
 

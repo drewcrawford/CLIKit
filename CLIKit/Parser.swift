@@ -106,7 +106,7 @@ public extension Parser {
     }
     public func handlesArguments(_ args: [String]) -> Bool {
         do {
-            try parse(args)
+            let _ = try parse(args)
             return true
         }
         catch {

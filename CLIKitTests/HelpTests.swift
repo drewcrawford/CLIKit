@@ -37,7 +37,7 @@ class HelpTests : XCTestCase {
     func testUserWantsHelp() {
         let cmd = CreateFISACommand()
         do {
-            try cmd.parser.parse(["--help"])
+            let _ = try cmd.parser.parse(["--help"])
             XCTFail("Should have raised parse error")
         }
         catch ParseError.userWantsHelp { /* */ }
@@ -47,7 +47,7 @@ class HelpTests : XCTestCase {
     func testMetaWantsHelp() {
         let meta = MetaCommand(name: "meta", subcommands: [CreateFISACommand()])
         do {
-            try meta.parser.parse(["createFISA","--help"])
+            let _ = try meta.parser.parse(["createFISA","--help"])
             XCTFail("Should have raised parse error")
         }
         catch ParseError.userWantsHelp { /* */ }

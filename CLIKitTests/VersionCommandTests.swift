@@ -24,7 +24,7 @@ import XCTest
 class VersionTests : XCTestCase {
     func testAlias() {
         let version = VersionCommand()
-        try! version.parser.parse(["--version"])
+        let _ = try! version.parser.parse(["--version"])
     }
     func testVersion() {
         let version = VersionCommand()

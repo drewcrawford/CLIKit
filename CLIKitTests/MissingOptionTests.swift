@@ -34,7 +34,7 @@ class MissingOptionTests : XCTestCase {
     func testMissingOption() {
         let metacommand = MetaCommand(name: "whatever", subcommands: [MissingOptionCmd()])
         do {
-            try metacommand.parse(["createIdentity","--whatever","something"])
+            let _ = try metacommand.parse(["createIdentity","--whatever","something"])
         }
         catch { print("\(error)") }
 

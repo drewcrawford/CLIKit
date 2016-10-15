@@ -36,7 +36,7 @@ class DontCrashWithNoArgsTests : XCTestCase {
     func testDontCrashWithNoArgs(){
         let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
         do {
-            try metacommand.parse([])
+            let _ = try metacommand.parse([])
         }
         catch { /* */ }
     }
