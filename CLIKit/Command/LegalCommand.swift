@@ -30,11 +30,11 @@ final class LegalCommand : EasyCommand {
     init() { /* */ }
     
     /**Gets the legal notice text for the specified bundle, if any */
-    static func getNoticeText(bundle bundle: NSBundle) -> String? {
+    static func getNoticeText(bundle: Bundle) -> String? {
         let notices = ["NOTICE","LICENSE"]
         for notice in notices {
-            if let noticePath = bundle.pathForResource(notice, ofType: nil) {
-                return (NSString(data:NSData(contentsOfFile: noticePath)!, encoding:NSUTF8StringEncoding) as! String)
+            if let noticePath = bundle.path(forResource: notice, ofType: nil) {
+                return (NSString(data:try! Data(contentsOf: URL(fileURLWithPath: noticePath)), encoding:String.Encoding.utf8.rawValue) as! String)
             }
         }
         return nil
@@ -42,7 +42,7 @@ final class LegalCommand : EasyCommand {
     
     internal func getNoticeText() -> String {
         var legalText = ""
-        for bundle in NSBundle.allBundles() + NSBundle.allFrameworks() {
+        for bundle in Bundle.allBundles + Bundle.allFrameworks {
             if let noticeText = LegalCommand.getNoticeText(bundle: bundle) {
                 //get bundle name and version
                 var bundleName : String = bundle.description
@@ -58,7 +58,7 @@ final class LegalCommand : EasyCommand {
         }
         return legalText
     }
-    func command(parseResult: ParseResult) {
+    func command(_ parseResult: ParseResult) {
         let legalText = getNoticeText()
         print(legalText)
     }

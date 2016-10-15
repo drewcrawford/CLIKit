@@ -23,7 +23,7 @@ import XCTest
 
 class OptionTypeParsingTests : XCTestCase {
     func testIntParse() {
-        let option = DefaultOption(longName: "int", help: "Some int", type: OptionType.IntOption(0))
+        let option = DefaultOption(longName: "int", help: "Some int", type: OptionType.intOption(0))
         var parseResult = ParseResult()
         var args = ["--int","2"]
         try! option.parse(&args, accumulateResult: &parseResult)
@@ -31,7 +31,7 @@ class OptionTypeParsingTests : XCTestCase {
     }
     
     func testIntParseDefault() {
-        let option = DefaultOption(longName: "int", help: "Some int", type: OptionType.IntOption(0), defaultValue: OptionType.IntOption(2))
+        let option = DefaultOption(longName: "int", help: "Some int", defaultValue: OptionType.intOption(2), type: OptionType.intOption(0))
         var parseResult = ParseResult()
         var args: [String] = []
         try! option.parse(&args, accumulateResult: &parseResult)

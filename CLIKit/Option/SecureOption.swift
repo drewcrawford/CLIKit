@@ -40,19 +40,19 @@ Create a new SecureOption.
         self.shortHelp = help
     }
     
-    public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
+    public func parse(_ args: inout [String], accumulateResult: inout ParseResult) throws {
         if let dv = self.defaultValue {
             accumulateResult[longName] = dv
             return
         }
-        let value = getpass("Enter \(longName):")
-        let strValue = String(CString: value, encoding: NSUTF8StringEncoding)!
+        let value = getpass("Enter \(longName):")!
+        let strValue = String(cString: value, encoding: String.Encoding.utf8)!
         switch(type) {
-        case .StringOption:
+        case .stringOption:
             break
         default:
             preconditionFailure("Not implemented for type \(type)")
         }
-        accumulateResult[longName] = OptionType.StringOption(strValue)
+        accumulateResult[longName] = OptionType.stringOption(strValue)
     }
 }

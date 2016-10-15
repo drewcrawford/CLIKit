@@ -51,7 +51,7 @@ internal final class CommandParser: Parser {
     var shortHelp: String
     var requiresCommandString: Bool //setting this to false means we handle the arguments regardless
     
-    private let innerParser: DefaultParser
+    fileprivate let innerParser: DefaultParser
     init(name: String, options: [Option], help: String, aliases: [String] = [], requiresCommandString: Bool = true) {
         self.name = name
         self.options = options
@@ -61,7 +61,7 @@ internal final class CommandParser: Parser {
         self.requiresCommandString = requiresCommandString
     }
     
-    func handlesArguments(args: [String]) -> Bool {
+    func handlesArguments(_ args: [String]) -> Bool {
         if requiresCommandString {
             var allAliases = aliases
             allAliases.append(name)
@@ -74,9 +74,9 @@ internal final class CommandParser: Parser {
         else { return true }
     }
     
-    func _parse(args: [String]) throws -> ParseResult {
+    func _parse(_ args: [String]) throws -> ParseResult {
         if !handlesArguments(args) {
-            throw ParseError.NotThisCommand
+            throw ParseError.notThisCommand
         }
         let newArgs: [String]
         if requiresCommandString {

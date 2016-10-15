@@ -21,19 +21,19 @@ import Foundation
 
 
 private final class MyGreatCommand : CLIKit.EasyCommand {
-    private let options : [Option] = [DefaultOption(longName: "myOption", help: "Help for this option")]
-    private let shortHelp = "Help for this command"
+    fileprivate let options : [Option] = [DefaultOption(longName: "myOption", help: "Help for this option")]
+    fileprivate let shortHelp = "Help for this command"
     let name = "myGreatCommand"
-    private func command(parseResult: ParseResult) {
+    fileprivate func command(_ parseResult: ParseResult) {
         //todo command logic here
     }
 }
 
 private final class MyGreatCommand2 : CLIKit.EasyCommand {
-    private let options : [Option] = []
-    private let shortHelp = "Help for this command"
+    fileprivate let options : [Option] = []
+    fileprivate let shortHelp = "Help for this command"
     let name = "myGreatCommand2"
-    private func command(parseResult: ParseResult) {
+    fileprivate func command(_ parseResult: ParseResult) {
         //todo command logic here
     }
 }

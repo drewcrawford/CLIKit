@@ -33,7 +33,7 @@ public final class DefaultOption: Option {
     - required: Whether a value for this option is required, or whether it is optional.  Note that, if `defaultValue != nil`, using `required: false` is not sensible.
     - type: The type of option.  Use `OptionType.StringType("")` to indicate we expect a `String` or `OptionType.IntType(0)` to indicate we expect an `Int`.
 */
-    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = true, type: OptionType = OptionType.StringOption("")) {
+    public init(longName: String, help: String, defaultValue: OptionType? = nil, required: Bool = true, type: OptionType = OptionType.stringOption("")) {
         self.required = required
         self.defaultValue = defaultValue
         self.longName = longName
@@ -41,29 +41,29 @@ public final class DefaultOption: Option {
         self.type = type
     }
     
-    public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
-        let idx = args.indexOf("--\(longName)")
+    public func parse(_ args: inout [String], accumulateResult: inout ParseResult) throws {
+        let idx = args.index(of: "--\(longName)")
         guard let index = idx else {
             //is there a default value?
             guard let d = defaultValue else {
                 //is the option optional?
                 if !required {
-                    accumulateResult[longName] = OptionType.NotPresent
+                    accumulateResult[longName] = OptionType.notPresent
                     return
                 }
-                throw ParseError.OptionMissing(self) }
+                throw ParseError.optionMissing(self) }
             accumulateResult[longName] = d
             return
         }
-        args.removeAtIndex(index) //remove --whatever
+        args.remove(at: index) //remove --whatever
         let value = args[index]
-        args.removeAtIndex(index) //remove value itself
+        args.remove(at: index) //remove value itself
         switch(type) {
-        case .StringOption:
-            accumulateResult[longName] = OptionType.StringOption(value)
-        case .IntOption:
-            guard let i = Int(value) else { throw ParseError.NotInt(value) }
-            accumulateResult[longName] = OptionType.IntOption(i)
+        case .stringOption:
+            accumulateResult[longName] = OptionType.stringOption(value)
+        case .intOption:
+            guard let i = Int(value) else { throw ParseError.notInt(value) }
+            accumulateResult[longName] = OptionType.intOption(i)
         default:
             preconditionFailure("Not implemented for type \(type)")
         }

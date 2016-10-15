@@ -25,10 +25,10 @@ private let identityOption = CLIKit.DefaultOption(longName: "identityFile", help
 private let fisaFileOption = CLIKit.DefaultOption(longName: "fisaFile", help: "Path to the FISA file to be operated on.", defaultValue: "DefaultFISAFile")
 
 private final class CreateFISACommand : CLIKit.EasyCommand {
-    private let options : [Option] = [identityOption, fisaFileOption, DefaultOption(longName: "identityDescription", help: "The description to use for your identity in the new FISA file.")]
-    private let shortHelp = "Create a new identity and save it to the specified file."
+    fileprivate let options : [Option] = [identityOption, fisaFileOption, DefaultOption(longName: "identityDescription", help: "The description to use for your identity in the new FISA file.")]
+    fileprivate let shortHelp = "Create a new identity and save it to the specified file."
     let name = "createFISA"
-    private func command(parseResult: ParseResult) {
+    fileprivate func command(_ parseResult: ParseResult) {
         abort()
     }
 }
@@ -50,7 +50,7 @@ class DefaultOptionTests : XCTestCase {
     func testDefaultHelp() {
         let cmd = CreateFISACommand()
         let results = cmd.parser.longHelp
-        let search = results.rangeOfString("fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
+        let search = results.range(of: "fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
         XCTAssert(search != nil)
     }
 }

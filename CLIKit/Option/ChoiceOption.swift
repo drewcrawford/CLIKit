@@ -26,20 +26,20 @@ public final class ChoiceOption : Option {
     public let longName : String
     public let shortHelp : String
     public let choices: [String]
-    public func parse(inout args: [String], inout accumulateResult: ParseResult) throws {
-        guard let index = args.indexOf("--\(longName)") else {
+    public func parse(_ args: inout [String], accumulateResult: inout ParseResult) throws {
+        guard let index = args.index(of: "--\(longName)") else {
             //maybe there's a default value we can use
             if let defaultValue = defaultValue {
                 accumulateResult[longName] = defaultValue
                 return
             }
             //otherwise
-            throw ParseError.OptionMissing(self)
+            throw ParseError.optionMissing(self)
         }
-        args.removeAtIndex(index)
+        args.remove(at: index)
         let choice = args[index]
-        guard let _ = choices.indexOf(choice) else {throw ParseError.UnknownChoice(choice, choices) }
-        accumulateResult[longName] = OptionType.StringOption(choice)
+        guard let _ = choices.index(of: choice) else {throw ParseError.unknownChoice(choice, choices) }
+        accumulateResult[longName] = OptionType.stringOption(choice)
     }
     
     /**
@@ -62,7 +62,7 @@ Construct a new ChoiceOption.
         for choice in choices {
             h += "\(choice)|"
         }
-        h = h[h.startIndex..<h.endIndex.predecessor()] //clamp comma
+        h = h[h.startIndex..<h.characters.index(before: h.endIndex)] //clamp comma
         h += "]"
         return h
     }
@@ -78,7 +78,7 @@ Construct a new ChoiceOption.
         for choice in choices {
             h += "\(choice), "
         }
-        h = h[h.startIndex..<h.endIndex.predecessor().predecessor()] //clamp comma
+        h = h[h.startIndex..<h.index(before: h.characters.index(before: h.endIndex))] //clamp comma
         h += "."
         if let d = defaultValue {
             h += "\n"

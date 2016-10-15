@@ -23,11 +23,11 @@ final class VersionCommand : EasyCommand {
     let name = "version"
     let options : [Option] = []
     let shortHelp = "Displays version information"
-    func command(parseResult: ParseResult) {
+    func command(_ parseResult: ParseResult) {
         var name : String = "{unknown name}"
         var version: String = "{unknown version}"
         var build : String = "{unknown build}"
-        if let info = NSBundle.mainBundle().infoDictionary {
+        if let info = Bundle.main.infoDictionary {
             if let n = info[String(kCFBundleNameKey)] as? String {
                 name = n
             }
@@ -40,7 +40,7 @@ final class VersionCommand : EasyCommand {
         }
         
         print("\(name) \(version) (\(build))")
-        if let legalInfo = LegalCommand.getNoticeText(bundle: NSBundle.mainBundle()) {
+        if let legalInfo = LegalCommand.getNoticeText(bundle: Bundle.main) {
             print("\(legalInfo)")
         }
     }

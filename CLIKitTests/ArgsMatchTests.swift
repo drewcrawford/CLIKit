@@ -23,10 +23,10 @@ private let fisaFileOption = CLIKit.DefaultOption(longName: "fisaFile", help: "P
 
 
 private final class CreateFISACommand : CLIKit.EasyCommand {
-    private let options : [Option] = [identityOption, fisaFileOption, DefaultOption(longName: "identityDescription", help: "The description to use for your identity in the new FISA file.")]
-    private let shortHelp = "Create a new identity and save it to the specified file."
+    fileprivate let options : [Option] = [identityOption, fisaFileOption, DefaultOption(longName: "identityDescription", help: "The description to use for your identity in the new FISA file.")]
+    fileprivate let shortHelp = "Create a new identity and save it to the specified file."
     let name = "createFISA"
-    private func command(parseResult: ParseResult) {
+    fileprivate func command(_ parseResult: ParseResult) {
         abort()
     }
 }

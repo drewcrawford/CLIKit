@@ -22,7 +22,7 @@ import XCTest
 @testable import CLIKit
 
 private final class MissingOptionCmd : CLIKit.EasyCommand {    
-    private func command(parseResult: ParseResult) {
+    fileprivate func command(_ parseResult: ParseResult) {
         abort()
     }
     let name = "createIdentity"

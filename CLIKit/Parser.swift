@@ -38,7 +38,7 @@ parseResult[StronglyTyped.MyKey.rawValue]
 This way you ensure you don't have typos in your parsing logic.
 */
 public struct ParseResult {
-    private var innerDict : [String: OptionType] = [:]
+    fileprivate var innerDict : [String: OptionType] = [:]
     /**
 - returns: a non-optional.  If you're looking for a key that doesn't exist, that's programmer error. */
     public subscript(key: String) -> OptionType {
@@ -55,7 +55,7 @@ public struct ParseResult {
 */
 public protocol Parser {
     /**Implement parsing logic here.  Don't call this function directly, instead call `.parse` */
-    func _parse(args: [String]) throws -> ParseResult
+    func _parse(_ args: [String]) throws -> ParseResult
     var name: String { get }
     /**A short description to help the user understand how to use the parser */
     var shortHelp : String { get }
@@ -64,36 +64,36 @@ public protocol Parser {
     
     /**Determines if the parser handles the arguments.  The default implementation attempts a parse, and returns false if the parse fails.
 - discussion: This is used inside the `CommandParser` to indicate whether the command matches the input.  That way if the command matches, but some argument fails, we return an error to the user from the parser that handled the arguments. */
-    func handlesArguments(args: [String]) -> Bool
+    func handlesArguments(_ args: [String]) -> Bool
     
     /**- returns: the best parser candidate for the given arguments.  The default implementation returns the receiver.
 - note: With metaparsers, returning a child object here may yield better error/help messages.*/
-    func underlyingParser(args: [String]) -> Parser
+    func underlyingParser(_ args: [String]) -> Parser
 }
 public extension Parser {
-    func underlyingParser(args: [String]) -> Parser {
+    func underlyingParser(_ args: [String]) -> Parser {
         return self
     }
-    func parse(args: [String]) throws -> ParseResult {
-        if args.indexOf("--help") != nil {
+    func parse(_ args: [String]) throws -> ParseResult {
+        if args.index(of: "--help") != nil {
             print("\(self.underlyingParser(args).longHelp)")
-            throw ParseError.UserWantsHelp
+            throw ParseError.userWantsHelp
         }
         return try _parse(args)
     }
     /**Parse the arguments from the environment, displaying error and usage information to the user on a parse error.*/
     public func parseArguments() -> ParseResult? {
         do {
-            let args = NSProcessInfo.processInfo().arguments
+            let args = ProcessInfo.processInfo.arguments
             let choppedArguments = [String](args[1..<args.count])
             let result : ParseResult = try self.parse(choppedArguments)
             return result
         }
-        catch ParseError.InnerParserFailed(let innerError, let parser) {
+        catch ParseError.innerParserFailed(let innerError, let parser) {
             print("\(innerError.📡22310636Description)")
             print("Usage: \(self.name) \(parser.longHelp)")
         }
-        catch ParseError.UserWantsHelp {
+        catch ParseError.userWantsHelp {
             /*In this case, we've already printed the help. */
             return nil
         }
@@ -104,7 +104,7 @@ public extension Parser {
         }
         return nil
     }
-    public func handlesArguments(args: [String]) -> Bool {
+    public func handlesArguments(_ args: [String]) -> Bool {
         do {
             try parse(args)
             return true
@@ -130,7 +130,8 @@ public final class DefaultParser {
 }
 
 extension DefaultParser : Parser {
-    public func _parse(var args: [String]) throws -> ParseResult {
+    public func _parse(_ args: [String]) throws -> ParseResult {
+        var args = args
         var t = ParseResult()
         for option in options {
             try option.parse(&args, accumulateResult: &t)

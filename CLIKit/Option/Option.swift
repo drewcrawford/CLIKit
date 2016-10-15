@@ -21,11 +21,11 @@
 /**Indicates the type of the option. */
 public enum OptionType {
     ///An int
-    case IntOption(Int)
+    case intOption(Int)
     ///A string
-    case StringOption(String)
+    case stringOption(String)
     ///indicates the option wasn't present.  Typically used for optional options.
-    case NotPresent
+    case notPresent
     
     /**
     
@@ -38,7 +38,7 @@ If you don't know if the user passed this option (e.g., if `required == false`),
     public var stringValue: String {
         get {
             switch(self){
-            case .StringOption(let str):
+            case .stringOption(let str):
                 return str
             default:
                 abort()
@@ -49,11 +49,11 @@ If you don't know if the user passed this option (e.g., if `required == false`),
     public var maybeStringValue: String? {
         get {
             switch(self) {
-            case.StringOption(let str):
+            case.stringOption(let str):
                 return str
-            case .NotPresent:
+            case .notPresent:
                 return nil
-            case .IntOption:
+            case .intOption:
                 preconditionFailure("Don't use maybeStringValue for an int option.")
             }
         }
@@ -68,7 +68,7 @@ If you don't know if the user passed this option (e.g., if `required == false`),
     public var intValue: Int {
         get {
             switch(self) {
-            case .IntOption(let int):
+            case .intOption(let int):
                 return int
             default:
                 preconditionFailure("No int available")
@@ -81,28 +81,28 @@ If you don't know if the user passed this option (e.g., if `required == false`),
 
 public func ==(lhs: OptionType, rhs: String) -> Bool {
     switch(lhs) {
-    case .StringOption(let str):
+    case .stringOption(let str):
         return str == rhs
-    case .NotPresent:
+    case .notPresent:
         return false
-    case .IntOption:
+    case .intOption:
         return false
     }
 }
 
-extension OptionType : StringLiteralConvertible {
+extension OptionType : ExpressibleByStringLiteral {
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
     public typealias UnicodeScalarLiteralType = Character
     public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
-        self = OptionType.StringOption("\(value)")
+        self = OptionType.stringOption("\(value)")
     }
     
     public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
-        self = OptionType.StringOption(value)
+        self = OptionType.stringOption(value)
     }
     
     public init(stringLiteral value: StringLiteralType) {
-        self = OptionType.StringOption(value)
+        self = OptionType.stringOption(value)
     }
 }
 
@@ -123,7 +123,7 @@ public protocol Option {
     /**A prototype for what type this option will hold.  The defualt is StringOption. */
     var type : OptionType { get }
     
-    func parse(inout args: [String], inout accumulateResult: ParseResult) throws
+    func parse(_ args: inout [String], accumulateResult: inout ParseResult) throws
 }
 
 extension Option {
@@ -132,7 +132,7 @@ extension Option {
     }
     public var type: OptionType {
         get {
-            return OptionType.StringOption("")
+            return OptionType.stringOption("")
         }
     }
     public var longHelp : String {

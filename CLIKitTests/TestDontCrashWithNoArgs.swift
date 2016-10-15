@@ -23,7 +23,7 @@ import XCTest
 
 
 private final class DontCrashWithNoArgs : CLIKit.EasyCommand {
-    private func command(parseResult: ParseResult) {
+    fileprivate func command(_ parseResult: ParseResult) {
         abort()
     }
     let name = "createIdentity"

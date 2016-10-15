@@ -23,7 +23,7 @@
 - note: A version command is automatically added to `MetaCommand`s.*/
 public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
     
-    private let subcommands: [Command]
+    fileprivate let subcommands: [Command]
     public let name: String
     public var parser: CLIKit.Parser {
         get {
@@ -35,10 +35,10 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
         self.subcommands = subcommands + [LegalCommand(), VersionCommand()]
     }
     
-    private var recentlyParsedCommand : Command! = nil
+    fileprivate var recentlyParsedCommand : Command! = nil
     
-    public func _parse(args: [String]) throws -> ParseResult {
-        if args.count == 0 { throw ParseError.NoParserMatched }
+    public func _parse(_ args: [String]) throws -> ParseResult {
+        if args.count == 0 { throw ParseError.noParserMatched }
         for command in subcommands {
             if command.parser.handlesArguments(args) {
                 recentlyParsedCommand = command
@@ -46,21 +46,21 @@ public final class MetaCommand : CLIKit.Command, CLIKit.Parser {
                     return try command.parser.parse(args)
                 }
                 catch {
-                    throw ParseError.InnerParserFailed(error, command.parser)
+                    throw ParseError.innerParserFailed(error, command.parser)
                 }
             }
         }
-        throw ParseError.NoParserMatched
+        throw ParseError.noParserMatched
     }
     
-    public func underlyingParser(args: [String]) -> Parser {
+    public func underlyingParser(_ args: [String]) -> Parser {
         for child in subcommands {
             if child.parser.handlesArguments(args) { return child.parser }
         }
         return self
     }
     
-    public func command(parseResult: ParseResult) {
+    public func command(_ parseResult: ParseResult) {
         recentlyParsedCommand.command(parseResult)
     }
     

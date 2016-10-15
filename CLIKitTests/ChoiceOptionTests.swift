@@ -38,7 +38,7 @@ class ChoiceOptionTests : XCTestCase {
             try option.parse(&args, accumulateResult: &parseResult)
             XCTFail("Unexpected success")
         }
-        catch ParseError.UnknownChoice { /* */ }
+        catch ParseError.unknownChoice { /* */ }
         catch { XCTFail("\(error)") }
     }
     

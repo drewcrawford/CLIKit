@@ -29,14 +29,14 @@ final class GitLabSetToken: Command {
             return CLIKit.CommandParser(name: "GitLabSetToken", options:[option], help: "whatever")
         }
     }
-    func command(parseResult: ParseResult) {
+    func command(_ parseResult: ParseResult) {
     }
 }
 
 
 class CJDerivedTests: XCTestCase {
     func testGitLabParse() {
-        let gitLabToken = SecureOption(longName: "token", help:"no",required: true, defaultValue: "MyToken")
+        let gitLabToken = SecureOption(longName: "token", help:"no",defaultValue: "MyToken", required: true)
         let storeTokenParser = CLIKit.CommandParser(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
         let _p = try! storeTokenParser.parse(["storeGitLabToken","--token","mytoken"])
         XCTAssert(_p["token"] == "MyToken")

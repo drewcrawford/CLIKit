@@ -25,7 +25,7 @@ public protocol Command {
     var parser: CLIKit.Parser { get }
     /**A function to run when the command is selected.
 - parameter parseResult: The result we parsed for this command */
-    func command(parseResult: ParseResult)
+    func command(_ parseResult: ParseResult)
     var name: String { get }
     
     /**Additional aliases for the given command.  Override this to specify alternatives. */

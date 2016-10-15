@@ -19,25 +19,25 @@
 //  language governing rights and limitations under the RPL.
 
 /**An error occurred while parsing command line arguments */
-enum ParseError : ErrorType {
+enum ParseError : Error {
     ///The user did not specify an option
-    case OptionMissing(Option)
+    case optionMissing(Option)
     ///A command is being routed to a parser that does not want to handle it
-    case NotThisCommand
+    case notThisCommand
     ///No subparser can match the arguments
-    case NoParserMatched
+    case noParserMatched
     ///A subparser failed to parse the arguments.  More information may be found in the associated values
-    case InnerParserFailed(ErrorType, Parser)
+    case innerParserFailed(Error, Parser)
     ///The user indicated that they want help, so parsing should not continue.
-    case UserWantsHelp
+    case userWantsHelp
     ///The user chose an option in the first associated value, but we expected a choice from the second associated value
-    case UnknownChoice(String, [String])
+    case unknownChoice(String, [String])
     ///This is an `Int` option, but the text passed to the parser is not an integer.
-    case NotInt(String)
+    case notInt(String)
     
     var 📡_22310636Description: String {
         switch(self) {
-        case .OptionMissing(let option):
+        case .optionMissing(let option):
             return "Missing option --\(option.longName)"
         default:
             return "\(self)"
@@ -45,7 +45,7 @@ enum ParseError : ErrorType {
     }
 }
 
-extension ErrorType {
+extension Error {
     var 📡22310636Description: String {
         if let e = self as? ParseError {
             return e.📡_22310636Description
@@ -55,11 +55,11 @@ extension ErrorType {
 }
 
 /**Prints text to the standard error. */
-public func printErr(items: Any...) {
+public func printErr(_ items: Any...) {
     //this monstrosity to work around 📡22495195
     var joined = items.reduce("") { (accumulator, element) -> String in
         return accumulator + " \(element)"
     }
-    joined.removeAtIndex(joined.characters.indices.startIndex)
+    joined.remove(at: joined.characters.startIndex)
     fputs(joined+"\n", stderr)
 }
