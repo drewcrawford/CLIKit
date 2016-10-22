@@ -4,11 +4,11 @@
   :external-packages [
     {
       :url "https://code.sealedabstract.com/drewcrawford/Caroline.git"
-      :branch "master"
+      :version [">= 1.0"]
     }
     {
       :url "https://code.sealedabstract.com/drewcrawford/pianissimo.git"
-      :branch "master"
+      :version [">= 0.1"]
     }
   ]
 
