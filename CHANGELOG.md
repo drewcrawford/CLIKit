@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project does not follow semver.
 
+# 2.0 - 2016-10-22
+
+* Update to Swift 3
+* Now distributed as a static library, which makes more sense for command-line tools
+* Builds with Anarchy Tools.  http://anarchytools.org
+
 # 1.2.1 - 2015-12-07
 
 * Fixing an issue where a MetaCommand might unexpectedly try to parse the wrong command.
