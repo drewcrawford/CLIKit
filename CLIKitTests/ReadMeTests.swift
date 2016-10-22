@@ -2,7 +2,7 @@
 //  ReadMeTests.swift
 //  CLIKit
 //
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -29,19 +29,13 @@ private final class MyGreatCommand : CLIKit.EasyCommand {
 
 
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class ReadMeTests : XCTestCase {
-    func testReadMe() {
+class ReadMeTests : CarolineTest {
+    func test() throws {
         let command = MyGreatCommand()
-        do {
-            let r  = try command.parser.parse(["--myOption","Excellent option"])
-            command.command(r)
-        }
-        catch {
-            XCTFail("\(error)")
-        }
-
+        let r  = try command.parser.parse(["--myOption","Excellent option"])
+        command.command(r)
     }
 }

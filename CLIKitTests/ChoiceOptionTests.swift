@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/22/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,51 +17,60 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class ChoiceOptionTests : XCTestCase {
-    func testChoiceOption() {
-        let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"])
-        var parseResult = ParseResult()
-        var args = ["--mychoice","a"]
-        try! option.parse(&args, accumulateResult: &parseResult)
-        XCTAssert(parseResult["mychoice"].stringValue == "a")
-    }
-    
-    func testChoiceBadOption() {
-        let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"])
-        var parseResult = ParseResult()
-        var args = ["--mychoice","d"]
-        do {
+class ChoiceOptionTests  {
+    class ChoiceOptionTest: CarolineTest {
+        func test() throws {
+            let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"])
+            var parseResult = ParseResult()
+            var args = ["--mychoice","a"]
             try option.parse(&args, accumulateResult: &parseResult)
-            XCTFail("Unexpected success")
+            self.assert(parseResult["mychoice"].stringValue, equals: "a")
         }
-        catch ParseError.unknownChoice { /* */ }
-        catch { XCTFail("\(error)") }
+    }
+    class BadOption : CarolineTest {
+        func test() {
+            let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"])
+            var parseResult = ParseResult()
+            var args = ["--mychoice","d"]
+            do {
+                try option.parse(&args, accumulateResult: &parseResult)
+                self.fail("Unexpected success")
+            }
+            catch ParseError.unknownChoice { /* */ }
+            catch { self.fail("\(error)")}
+        }
     }
     
-    func testChoiceNotRequired() {
-        let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"], defaultValue: "b")
-        var parseResult = ParseResult()
-        var args : [String] = []
-        try! option.parse(&args, accumulateResult: &parseResult)
-    }
-    func testChoiceNotRequiredHelp() {
-        let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"],defaultValue: "b")
-        let expectedLongHelp = "mychoice (optional): pick one\nValid choices are: a, b, c.\nThe default value is b."
-        let expectedUsageHelp = "--mychoice [a|b|c]"
-        XCTAssert(option.usageHelp == expectedUsageHelp)
-        XCTAssert(option.longHelp == expectedLongHelp)
+    class ChoiceNotRequired: CarolineTest {
+        func test() throws {
+            let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"], defaultValue: "b")
+            var parseResult = ParseResult()
+            var args : [String] = []
+            try option.parse(&args, accumulateResult: &parseResult)
+        }
     }
     
-    func testChoiceHelp() {
-        let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"])
-        let expectedLongHelp = "mychoice: pick one\nValid choices are: a, b, c."
-        let expectedUsageHelp = "--mychoice [a|b|c]"
-        XCTAssert(option.usageHelp == expectedUsageHelp)
-        XCTAssert(option.longHelp == expectedLongHelp)
+    class ChoiceNotRequiredHelp: CarolineTest {
+        func test() {
+            let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"],defaultValue: "b")
+            let expectedLongHelp = "mychoice (optional): pick one\nValid choices are: a, b, c.\nThe default value is b."
+            let expectedUsageHelp = "--mychoice [a|b|c]"
+            self.assert(option.usageHelp, equals: expectedUsageHelp)
+            self.assert(option.longHelp, equals: expectedLongHelp)
+        }
     }
     
+    class ChoiceHelp: CarolineTest {
+        func test() {
+            let option = ChoiceOption(longName: "mychoice", shortHelp: "pick one", choices: ["a","b","c"])
+            let expectedLongHelp = "mychoice: pick one\nValid choices are: a, b, c."
+            let expectedUsageHelp = "--mychoice [a|b|c]"
+            self.assert(option.usageHelp, equals: expectedUsageHelp)
+            self.assert(option.longHelp, equals: expectedLongHelp)
+        }
+    }
     
 }

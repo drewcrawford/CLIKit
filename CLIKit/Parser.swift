@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/10/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,6 +17,7 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 import Foundation
+import pianissimo
 /**A type that holds the result of the parse.  The result is subscriptable.
 
 - note: It's recommended that you use strngly-typed keys where possible.  Thus you could create
@@ -48,6 +48,10 @@ public struct ParseResult {
         set {
             innerDict[key] = newValue
         }
+    }
+    
+    init() {
+        pianissimo.register(legalText: "This product contains software written by Drew Crawford.  http://sealedabstract.com\nCLIKit © 2016 Drew Crawford.  Used under the RPL.  https://code.sealedabstract.com/drewcrawford/CLIKit\n\nThis software is provided strictly on an \"AS IS\" basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, AND LICENSOR HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific language governing rights and limitations under the RPL.",name: "CLIKit.legal")
     }
 }
 

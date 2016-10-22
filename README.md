@@ -1,5 +1,10 @@
 CLIKit is an advanced, intuitive command-line parsing library for Swift programs.  It's designed to be elegant, powerful, and have all the right defaults.
 
+[![Anarchy Tools compatible](https://img.shields.io/badge/Anarchy%20Tools-compatible-4BC51D.svg?style=flat)](http://anarchytools.org)
+![License:RPL](https://img.shields.io/hexpm/l/plug.svg)
+![Swift:3](https://img.shields.io/badge/Swift-3-blue.svg)
+![Platform:macOS](https://img.shields.io/badge/Platform-macOS-red.svg)
+
 # Usage
 
 ```swift

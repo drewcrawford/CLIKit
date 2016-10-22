@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/28/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,19 +17,24 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class OptionalArgumentsTests : XCTestCase {
-    func testOptional() {
-        let o = DefaultOption(longName: "myname", help: "myhelp", required: false)
-        let parser = DefaultParser(name: "myparser", options: [o])
-        let _ = try! parser.parse([])
+class OptionalArgumentsTests {
+    
+    class Optional: CarolineTest {
+        func test() throws {
+            let o = DefaultOption(longName: "myname", help: "myhelp", required: false)
+            let parser = DefaultParser(name: "myparser", options: [o])
+            let _ = try parser.parse([])
+        }
     }
     
-    func testOptionalHelp() {
-        let o = DefaultOption(longName: "myname", help: "myhelp", required: false)
-        let help = o.longHelp
-        XCTAssert(help == "myname (optional): myhelp")
+    class OptionalHelp: CarolineTest {
+        func test() throws {
+            let o = DefaultOption(longName: "myname", help: "myhelp", required: false)
+            let help = o.longHelp
+            self.assert(help, equals: "myname (optional): myhelp")
+        }
     }
 }

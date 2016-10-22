@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/30/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,11 +17,11 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class PrintTests : XCTestCase {
-    func testPrintStdError() {
+class PrintTest : CarolineTest {
+    func test() {
         printErr("Do you get this print?")
     }
 }

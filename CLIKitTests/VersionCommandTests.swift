@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/20/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,22 +17,29 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class VersionTests : XCTestCase {
-    func testAlias() {
-        let version = VersionCommand()
-        let _ = try! version.parser.parse(["--version"])
+class VersionTests  {
+    class Alias: CarolineTest {
+        func test() throws {
+            let version = VersionCommand()
+            let _ = try version.parser.parse(["--version"])
+        }
     }
-    func testVersion() {
-        let version = VersionCommand()
-        let parseResult = try! version.parser.parse(["--version"])
-        version.command(parseResult)
+    
+    class Version: CarolineTest {
+        func test() throws {
+            let version = VersionCommand()
+            let parseResult = try version.parser.parse(["--version"])
+            version.command(parseResult)
+        }
     }
-    func testVersionDefaults() {
-        let version = MetaCommand(name: "mymeta", subcommands: [])
-        let parseResult = try! version.parser.parse(["--version"])
-        version.command(parseResult)
+    class VersionDefaults: CarolineTest {
+        func test() throws {
+            let version = MetaCommand(name: "mymeta", subcommands: [])
+            let parseResult = try version.parser.parse(["--version"])
+            version.command(parseResult)
+        }
     }
 }

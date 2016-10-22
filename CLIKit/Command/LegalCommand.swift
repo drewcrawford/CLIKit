@@ -2,9 +2,7 @@
 //  LegalCommand.swift
 //  CLIKit
 //
-//  Created by Drew Crawford on 8/18/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -23,6 +21,7 @@
 This command looks for files called NOTICE or LICENSE, in the current bundle and its frameworks.  It outputs those notices to standard out.
 This command is installed by default on all new MetaCommands.
 */
+import pianissimo
 import Foundation
 final class LegalCommand : EasyCommand {
     let name = "legal"
@@ -42,22 +41,7 @@ final class LegalCommand : EasyCommand {
     }
     
     internal func getNoticeText() -> String {
-        var legalText = ""
-        for bundle in Bundle.allBundles + Bundle.allFrameworks {
-            if let noticeText = LegalCommand.getNoticeText(bundle: bundle) {
-                //get bundle name and version
-                var bundleName : String = bundle.description
-                var bundleVersion : String = ""
-                if let info = bundle.infoDictionary {
-                    if let name = info[String(kCFBundleNameKey)] as? String { bundleName = name }
-                    if let version = info[String("CFBundleShortVersionString")] as? String { bundleVersion = version }
-                }
-                legalText += "\(bundleName) \(bundleVersion)\n"
-                legalText += noticeText
-                legalText += "\n\n"
-            }
-        }
-        return legalText
+        return pianissimo.legalTexts.joined(separator: "\n\n")
     }
     func command(_ parseResult: ParseResult) {
         let legalText = getNoticeText()

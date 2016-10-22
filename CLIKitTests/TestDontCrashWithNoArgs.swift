@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/16/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -19,8 +18,8 @@
 //  language governing rights and limitations under the RPL.
 
 @testable import CLIKit
-import XCTest
-
+import CarolineCore
+import Darwin
 
 private final class DontCrashWithNoArgs : CLIKit.EasyCommand {
     fileprivate func command(_ parseResult: ParseResult) {
@@ -32,17 +31,21 @@ private final class DontCrashWithNoArgs : CLIKit.EasyCommand {
 }
 
 
-class DontCrashWithNoArgsTests : XCTestCase {
-    func testDontCrashWithNoArgs(){
-        let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
-        do {
-            let _ = try metacommand.parse([])
+class DontCrashWithNoArgsTests  {
+    class DontCrashWithNoArgsTest: CarolineTest {
+        func test() {
+            let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
+            do {
+                let _ = try metacommand.parse([])
+            }
+            catch { /* */ }
         }
-        catch { /* */ }
     }
     
-    func testUsage() {
-        let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
-        let _ = metacommand.longHelp
+    class TestUsage: CarolineTest {
+        func test() {
+            let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
+            let _ = metacommand.longHelp
+        }
     }
 }

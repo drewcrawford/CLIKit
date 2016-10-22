@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/30/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,23 +17,27 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class OptionTypeParsingTests : XCTestCase {
-    func testIntParse() {
-        let option = DefaultOption(longName: "int", help: "Some int", type: OptionType.intOption(0))
-        var parseResult = ParseResult()
-        var args = ["--int","2"]
-        try! option.parse(&args, accumulateResult: &parseResult)
-        XCTAssert(parseResult["int"].intValue == 2)
+class OptionTypeParsingTests {
+    class IntParse: CarolineTest {
+        func test() throws {
+            let option = DefaultOption(longName: "int", help: "Some int", type: OptionType.intOption(0))
+            var parseResult = ParseResult()
+            var args = ["--int","2"]
+            try option.parse(&args, accumulateResult: &parseResult)
+            self.assert(parseResult["int"].intValue, equals: 2)
+        }
     }
     
-    func testIntParseDefault() {
-        let option = DefaultOption(longName: "int", help: "Some int", defaultValue: OptionType.intOption(2), type: OptionType.intOption(0))
-        var parseResult = ParseResult()
-        var args: [String] = []
-        try! option.parse(&args, accumulateResult: &parseResult)
-        XCTAssert(parseResult["int"].intValue == 2)
+    class IntParseDefault: CarolineTest {
+        func test() throws {
+            let option = DefaultOption(longName: "int", help: "Some int", defaultValue: OptionType.intOption(2), type: OptionType.intOption(0))
+            var parseResult = ParseResult()
+            var args: [String] = []
+            try option.parse(&args, accumulateResult: &parseResult)
+            self.assert(parseResult["int"].intValue, equals: 2)
+        }
     }
 }

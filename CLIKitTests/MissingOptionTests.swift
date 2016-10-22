@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/17/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,8 +17,9 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
+import Darwin
 
 private final class MissingOptionCmd : CLIKit.EasyCommand {    
     fileprivate func command(_ parseResult: ParseResult) {
@@ -30,13 +30,12 @@ private final class MissingOptionCmd : CLIKit.EasyCommand {
     let shortHelp = "DontCare"
 }
 
-class MissingOptionTests : XCTestCase {
-    func testMissingOption() {
+class MissingOptionTests : CarolineTest {
+    func test() {
         let metacommand = MetaCommand(name: "whatever", subcommands: [MissingOptionCmd()])
         do {
             let _ = try metacommand.parse(["createIdentity","--whatever","something"])
         }
         catch { print("\(error)") }
-
     }
 }

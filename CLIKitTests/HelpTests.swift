@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/20/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -17,8 +16,9 @@
 //  LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
+import Darwin
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
 private let identityOption = CLIKit.DefaultOption(longName: "identityFile", help: "Path to the location file.  For security reasons, it must have permissions 0600 (only user-readable)")
@@ -33,24 +33,29 @@ private final class CreateFISACommand : CLIKit.EasyCommand {
     }
 }
 
-class HelpTests : XCTestCase {
-    func testUserWantsHelp() {
-        let cmd = CreateFISACommand()
-        do {
-            let _ = try cmd.parser.parse(["--help"])
-            XCTFail("Should have raised parse error")
+class HelpTests {
+    
+    class UserWantsHelp: CarolineTest {
+        func test() {
+            let cmd = CreateFISACommand()
+            do {
+                let _ = try cmd.parser.parse(["--help"])
+                self.fail("Should have raised parse error")
+            }
+            catch ParseError.userWantsHelp { /* */ }
+            catch { self.fail("\(error)")}
         }
-        catch ParseError.userWantsHelp { /* */ }
-        catch { XCTFail("\(error)")}
     }
     
-    func testMetaWantsHelp() {
-        let meta = MetaCommand(name: "meta", subcommands: [CreateFISACommand()])
-        do {
-            let _ = try meta.parser.parse(["createFISA","--help"])
-            XCTFail("Should have raised parse error")
+    class MetaWantsHelp: CarolineTest {
+        func test() {
+            let meta = MetaCommand(name: "meta", subcommands: [CreateFISACommand()])
+            do {
+                let _ = try meta.parser.parse(["createFISA","--help"])
+                self.fail("Should have raised parse error")
+            }
+            catch ParseError.userWantsHelp { /* */ }
+            catch { self.fail("\(error)")}
         }
-        catch ParseError.userWantsHelp { /* */ }
-        catch { XCTFail("\(error)")}
     }
 }

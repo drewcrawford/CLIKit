@@ -2,7 +2,7 @@
 //  MetaCommandTests.swift
 //  CLIKit
 //
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -38,15 +38,15 @@ private final class MyGreatCommand2 : CLIKit.EasyCommand {
     }
 }
 
-import XCTest
+import CarolineCore
 
-class MetaCommantTests : XCTestCase {
-    func testMetaCommandOrder() {
+class MetaCommandOrder : CarolineTest {
+    func test() throws {
         //we try to parse the underlying command
         //that appears second in the creation order
         //this exhibits a bug in 1.3 related to requiresCommandString.
         let meta = MetaCommand(name: "myMeta", subcommands: [MyGreatCommand(),MyGreatCommand2()])
-        let _ = try! meta.parse(["myGreatCommand2"])
+        let _ = try meta.parse(["myGreatCommand2"])
     }
 }
 

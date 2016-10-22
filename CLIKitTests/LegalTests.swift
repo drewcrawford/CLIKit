@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/18/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,20 +17,24 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
 @testable import CLIKit
 
-class LegalTestsTests : XCTestCase {
+class LegalTests  {
     /*verify that the legal cmd is installed by default */
-    func testMeta() {
-        let meta = MetaCommand(name: "LegalTests", subcommands: [])
-        let _ = try! meta.parse(["legal"])
+    class Meta : CarolineTest {
+        func test() throws {
+            let meta = MetaCommand(name: "LegalTests", subcommands: [])
+            let _ = try! meta.parse(["legal"])
+        }
     }
     
-    func testLegal() {
-        let legal = LegalCommand()
-        let result = legal.getNoticeText()
-        XCTAssert(result.characters.count > 5)
-        
+    class Legal: CarolineTest {
+        func test() {
+            let legal = LegalCommand()
+            let result = legal.getNoticeText()
+            self.assert(result.characters.count > 5)
+            print("Legal texts were",result)
+        }
     }
 }

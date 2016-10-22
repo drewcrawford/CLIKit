@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/20/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -18,7 +17,9 @@
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
 
-import XCTest
+import CarolineCore
+import Darwin
+
 @testable import CLIKit
 
 private let identityOption = CLIKit.DefaultOption(longName: "identityFile", help: "Path to the location file.  For security reasons, it must have permissions 0600 (only user-readable)")
@@ -33,24 +34,30 @@ private final class CreateFISACommand : CLIKit.EasyCommand {
     }
 }
 
-class DefaultOptionTests : XCTestCase {
-    func testDefaultOptions() {
-        let cmd = CreateFISACommand()
-        let results = try! cmd.parser.parse(["createFISA", "--identityFile","whatever","--identityDescription","whatever"])
-        XCTAssert(results["fisaFile"] == "DefaultFISAFile")
+class DefaultOptionTests {
+    class DefaultOptions: CarolineTest {
+        func test() throws {
+            let cmd = CreateFISACommand()
+            let results = try cmd.parser.parse(["createFISA", "--identityFile","whatever","--identityDescription","whatever"])
+            self.assert(results["fisaFile"] == "DefaultFISAFile")
+        }
+    }
+    class OptionHelp: CarolineTest {
+        func test() {
+            let o = identityOption.longHelp
+            self.assert(o, equals: "identityFile: Path to the location file.  For security reasons, it must have permissions 0600 (only user-readable)")
+            let p = identityOption.usageHelp
+            self.assert(p, equals: "--identityFile [identityFile]")
+        }
     }
     
-    func testOptionHelp() {
-        let o = identityOption.longHelp
-        XCTAssert(o == "identityFile: Path to the location file.  For security reasons, it must have permissions 0600 (only user-readable)")
-        let p = identityOption.usageHelp
-        XCTAssert(p == "--identityFile [identityFile]")
+    class DefaultHelp: CarolineTest {
+        func test() {
+            let cmd = CreateFISACommand()
+            let results = cmd.parser.longHelp
+            let search = results.range(of: "fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
+            self.assert(search != nil)
+        }
     }
     
-    func testDefaultHelp() {
-        let cmd = CreateFISACommand()
-        let results = cmd.parser.longHelp
-        let search = results.range(of: "fisaFile (optional): Path to the FISA file to be operated on.\nThe default value is DefaultFISAFile.")
-        XCTAssert(search != nil)
-    }
 }

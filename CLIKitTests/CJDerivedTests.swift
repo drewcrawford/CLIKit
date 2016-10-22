@@ -3,8 +3,7 @@
 //  CLIKit
 //
 //  Created by Drew Crawford on 8/14/15.
-//  Copyright © 2015 DrewCrawfordApps. All rights reserved.
-//  CLIKit © 2015 DrewCrawfordApps LLC
+//  CLIKit © 2016 Drew Crawford
 //
 //  Unless explicitly acquired and licensed from Licensor under another
 //  license, the contents of this file are subject to the Reciprocal Public
@@ -17,9 +16,9 @@
 //  LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
 //  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 //  language governing rights and limitations under the RPL.
-
-import XCTest
+import CarolineCore
 @testable import CLIKit
+
 
 final class GitLabSetToken: Command {
     var name : String { get { return "gitLabSetToken" } }
@@ -33,27 +32,37 @@ final class GitLabSetToken: Command {
     }
 }
 
-
-class CJDerivedTests: XCTestCase {
-    func testGitLabParse() {
-        let gitLabToken = SecureOption(longName: "token", help:"no",defaultValue: "MyToken", required: true)
-        let storeTokenParser = CLIKit.CommandParser(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
-        let _p = try! storeTokenParser.parse(["storeGitLabToken","--token","mytoken"])
-        XCTAssert(_p["token"] == "MyToken")
+class CJDerivedTests {
+    class GitlabParse: CarolineTest {
+        func test() {
+            let gitLabToken = SecureOption(longName: "token", help:"no",defaultValue: "MyToken", required: true)
+            let storeTokenParser = CLIKit.CommandParser(name: "storeGitLabToken", options: [gitLabToken], help: "whatever")
+            self.check {
+                let _p = try storeTokenParser.parse(["storeGitLabToken","--token","mytoken"])
+                self.assert(_p["token"] == "MyToken")
+            }
+        }
     }
     
-    func testGitLabCommand() {
-        let storeTokenParser = GitLabSetToken().parser
-        let _p = try! storeTokenParser.parse(["GitLabSetToken","--token","mytoken"])
-        XCTAssert(_p["token"] == "mytoken")
+    class testGitLabCommand: CarolineTest {
+        func test() {
+            let storeTokenParser = GitLabSetToken().parser
+            self.check {
+                let _p = try storeTokenParser.parse(["GitLabSetToken","--token","mytoken"])
+                self.assert(_p["token"] == "mytoken")
+            }
+        }
     }
     
-    func testLegalAndPriority() {
-        let legalCommand = LegalCommand()
-        let gitLabCommand = GitLabSetToken()
-        let metacommand = MetaCommand(name: "CaveJohnson", subcommands: [legalCommand, gitLabCommand] )
-        let _ = try! metacommand.parse(["legal"])
-        //let priorityParser = CLIKit.PriorityParser(name: "cavejohnson", subparsers: [GitLabSetToken().parser, LegalCommand(legalText: "My legal text")])
-        //let result = priorityParser
+    class LegalAndPriority: CarolineTest {
+        func test() {
+            let legalCommand = LegalCommand()
+            let gitLabCommand = GitLabSetToken()
+            let metacommand = MetaCommand(name: "CaveJohnson", subcommands: [legalCommand, gitLabCommand] )
+            check {
+                let _ = try metacommand.parse(["legal"])
+            }
+        }
     }
 }
+
