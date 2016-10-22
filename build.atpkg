@@ -1,0 +1,52 @@
+(package
+  :name "CLIKit"
+
+  :external-packages [
+    {
+      :url "https://code.sealedabstract.com/drewcrawford/Caroline.git"
+      :branch "master"
+    }
+    {
+      :url "https://code.sealedabstract.com/drewcrawford/pianissimo.git"
+      :branch "master"
+    }
+  ]
+
+  :tasks {
+
+    :default {
+      :tool "atllbuild"
+      :sources ["CLIKit/**.swift"]
+      :name "CLIKit"
+      :output-type "static-library"
+      :publish-product true
+      :dependencies ["pianissimo.default"]
+      :link-with-product ["pianissimo.a"]
+    }
+
+    :gen-tests {
+        :tool "shell"
+        :script "~/Code/Caroline/.atllbuild/products/caroline-static-tool --core ${collect_sources:build-tests} > CLIKitTests/main.swift"
+    }
+
+    :build-tests {
+      :tool "atllbuild"
+      :sources ["CLIKitTests/**.swift"]
+      :name "CLIKitTests"
+      :output-type "executable"
+      :dependencies ["default"]
+      :link-with-product ["CLIKit.a" "CarolineCore.a" "pianissimo.a"]
+      :dependencies ["Caroline.core" "gen-tests" "default"]
+
+
+      :publish-product true
+    }
+
+    :check {
+      :tool "shell"
+      :script "bin/CLIKitTests"
+      :dependencies ["build-tests"]
+    }
+
+  }
+)

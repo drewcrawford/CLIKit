@@ -1,41 +1,14 @@
 types:
   - test
-  - package
 
 variables:
-  XCSBOT: "fc03b092ecd597b3488984a34d1d7e0c"
-  GITLAB_PROJECT_ID: "8"
-  FRAMEWORK_NAME: "CLIKit"
 
-xcs:
+test:
   type: test
   script:
-    - "/Applications/CaveJohnson.app/Contents/MacOS/CaveJohnsonCLI forceGitLabBranch --branchName CaveJohnsonAuto --hostname code.sealedabstract.com --projectID $GITLAB_PROJECT_ID"
-    - "sleep 1" 
-    - "XCSBUILDNO=`/Applications/CaveJohnson.app/Contents/MacOS/CaveJohnsonCLI xcsIntegrateNow --botID $XCSBOT --hostname localhost --sslPolicy localhost`"
-    - "/Applications/CaveJohnson.app/Contents/MacOS/CaveJohnsonCLI waitForIntegration --hostname localhost --botID $XCSBOT --sslPolicy localhost --buildNumber $XCSBUILDNO"
-    - "/Applications/CaveJohnson.app/Contents/MacOS/CaveJohnsonCLI xcsStatusToShell --hostname localhost --botID $XCSBOT --sslPolicy localhost --buildNumber $XCSBUILDNO"
-  only:
-    - master
+    - atpm fetch
+    - atbuild check --configuration test
   tags:
-    - xc7
-
-archive:
-   type: package
-   script:
-      - "CJ=/Applications/CaveJohnson.app/Contents/MacOS/CaveJohnsonCLI"
-      - "CARTHAGE=/usr/local/bin/carthage"
-      - "$CJ setVersion --infoPlistPath $FRAMEWORK_NAME/Info.plist --version ${CI_BUILD_ID}"
-      - "$CARTHAGE build --no-skip-current"
-      - "$CARTHAGE archive $FRAMEWORK_NAME"
-
-      - "ZIPFILE=$($CJ getNameVersionString --infoPlistPath $FRAMEWORK_NAME/Info.plist --productName $FRAMEWORK_NAME)-dev-${CI_BUILD_ID}.zip"
-      - "rm -rf /tmp/$FRAMEWORK_NAME/"
-      - "mkdir -p /tmp/$FRAMEWORK_NAME"
-      - "mv $FRAMEWORK_NAME.framework.zip /tmp/$FRAMEWORK_NAME/$ZIPFILE"
-   only:
-    - master
-
-   artifacts:
-      paths:
-      - /tmp/CLIKit/
+    - atbuild
+    - xcode8symlink
+    - caroline-static-tool
