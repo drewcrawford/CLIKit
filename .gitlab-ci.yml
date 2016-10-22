@@ -12,3 +12,4 @@ test:
     - atbuild
     - xcode8symlink
     - caroline-static-tool
+    - atpm
