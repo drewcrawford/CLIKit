@@ -26,7 +26,7 @@
 
     :gen-tests {
         :tool "shell"
-        :script "~/Code/Caroline/.atllbuild/products/caroline-static-tool --core ${collect_sources:build-tests} > CLIKitTests/main.swift"
+        :script "caroline-static-tool --core ${collect_sources:build-tests} > CLIKitTests/main.swift"
     }
 
     :build-tests {
