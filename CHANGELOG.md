@@ -8,6 +8,8 @@ This project does not follow semver.
 * Update to Swift 3
 * Now distributed as a static library, which makes more sense for command-line tools
 * Builds with Anarchy Tools.  http://anarchytools.org
+* We have a cute logo
+* CLIKit now has docs at http://clikit-docs.sealedabstract.com
 
 # 1.2.1 - 2015-12-07
 
