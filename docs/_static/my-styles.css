@@ -1,0 +1,17 @@
+dd {
+    margin-left: 30px;
+}
+
+.navbar-brand img {
+    width: 24px;
+    height: 24px;
+    display: inline;
+}
+
+code {
+    color: #29abe0;
+}
+
+code.descclassname {
+    color: #29abe0;
+}

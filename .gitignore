@@ -19,3 +19,4 @@ Carthage/Checkouts
 
 # this one is new in XC7, not sure what it does
 *.xcscmblueprint
+docs/_build

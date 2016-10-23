@@ -1,5 +1,6 @@
 types:
   - test
+  - deploy
 
 variables:
 
@@ -13,3 +14,32 @@ test:
     - xcode8symlink
     - caroline-static-tool
     - atpm
+
+docs:
+  stage: test
+  script:
+    - cd docs
+    - make html
+  tags:
+    - autoscale-linux
+
+  artifacts:
+    paths:
+      - docs/_build/html
+
+  image: drewcrawford/anarchy-sphinx:latest
+
+deploydocs:
+  stage: deploy
+  image: python:latest
+  dependencies:
+    - docs
+  script:
+  - pip install awscli
+  - aws s3 cp docs/_build/html/ s3://$DOC_BUCKET_NAME/ --recursive --acl "public-read"
+
+  when: manual
+  variables:
+    DOC_BUCKET_NAME: "clikit-docs.sealedabstract.com"
+  tags:
+    - autoscale-linux
