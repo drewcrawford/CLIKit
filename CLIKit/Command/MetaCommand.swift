@@ -30,9 +30,9 @@ public final class MetaCommand : Command, Parser {
             return self
         }
     }
-    public init(name: String, subcommands: [Command]) {
+    public init(name: String, version: String, subcommands: [Command]) {
         self.name = name
-        self.subcommands = subcommands + [LegalCommand(), VersionCommand()]
+        self.subcommands = subcommands + [LegalCommand(), VersionCommand(programName: name, versionString: version)]
     }
     
     fileprivate var recentlyParsedCommand : Command! = nil

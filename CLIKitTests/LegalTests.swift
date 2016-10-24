@@ -24,7 +24,7 @@ class LegalTests  {
     /*verify that the legal cmd is installed by default */
     class Meta : CarolineTest {
         func test() throws {
-            let meta = MetaCommand(name: "LegalTests", subcommands: [])
+            let meta = MetaCommand(name: "LegalTests", version: "0.0", subcommands: [])
             let _ = try! meta.parse(["legal"])
         }
     }

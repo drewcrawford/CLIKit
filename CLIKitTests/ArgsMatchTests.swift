@@ -36,7 +36,7 @@ import CarolineCore
 
 class ArgsMatchTestsTests : CarolineTest {
     func test() {
-        let metaParser = MetaCommand(name: "ArgsMatchTests", subcommands: [CreateFISACommand()])
+        let metaParser = MetaCommand(name: "ArgsMatchTests", version: "0.0", subcommands: [CreateFISACommand()])
         let result = try! metaParser.parse(["createFISA","--identityDescription","shadowfax is the best computer ever",
             "--fisaFile", "/tmp/test.fisa",
             "--identityFile","/tmp/identity.fisa"])
