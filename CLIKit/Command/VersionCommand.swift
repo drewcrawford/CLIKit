@@ -23,23 +23,15 @@ final class VersionCommand : EasyCommand {
     let name = "version"
     let options : [Option] = []
     let shortHelp = "Displays version information"
+    let versionString: String
+    let programName: String
+    init(programName: String, versionString: String) {
+        self.programName = programName
+        self.versionString = versionString
+    }
     func command(_ parseResult: ParseResult) {
-        var name : String = "{unknown name}"
-        var version: String = "{unknown version}"
-        var build : String = "{unknown build}"
-        if let info = Bundle.main.infoDictionary {
-            if let n = info[String(kCFBundleNameKey)] as? String {
-                name = n
-            }
-            if let n = info["CFBundleShortVersionString"] as? String {
-                version = n
-            }
-            if let n = info[String(kCFBundleVersionKey)] as? String {
-                build = n
-            }
-        }
         
-        print("\(name) \(version) (\(build))")
+        print("\(programName) \(versionString)")
         if let legalInfo = LegalCommand.getNoticeText(bundle: Bundle.main) {
             print("\(legalInfo)")
         }

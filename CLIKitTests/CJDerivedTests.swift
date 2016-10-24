@@ -58,7 +58,7 @@ class CJDerivedTests {
         func test() {
             let legalCommand = LegalCommand()
             let gitLabCommand = GitLabSetToken()
-            let metacommand = MetaCommand(name: "CaveJohnson", subcommands: [legalCommand, gitLabCommand] )
+            let metacommand = MetaCommand(name: "CaveJohnson", version: "0.0", subcommands: [legalCommand, gitLabCommand] )
             check {
                 let _ = try metacommand.parse(["legal"])
             }

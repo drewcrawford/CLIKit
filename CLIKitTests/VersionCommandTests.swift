@@ -23,21 +23,21 @@ import CarolineCore
 class VersionTests  {
     class Alias: CarolineTest {
         func test() throws {
-            let version = VersionCommand()
+            let version = VersionCommand(programName: "Foo", versionString: "1.0")
             let _ = try version.parser.parse(["--version"])
         }
     }
     
     class Version: CarolineTest {
         func test() throws {
-            let version = VersionCommand()
+            let version = VersionCommand(programName: "Foo", versionString: "1.0")
             let parseResult = try version.parser.parse(["--version"])
             version.command(parseResult)
         }
     }
     class VersionDefaults: CarolineTest {
         func test() throws {
-            let version = MetaCommand(name: "mymeta", subcommands: [])
+            let version = MetaCommand(name: "mymeta", version: "0.0", subcommands: [])
             let parseResult = try version.parser.parse(["--version"])
             version.command(parseResult)
         }

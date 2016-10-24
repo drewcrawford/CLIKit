@@ -49,7 +49,7 @@ class HelpTests {
     
     class MetaWantsHelp: CarolineTest {
         func test() {
-            let meta = MetaCommand(name: "meta", subcommands: [CreateFISACommand()])
+            let meta = MetaCommand(name: "meta", version: "0.0", subcommands: [CreateFISACommand()])
             do {
                 let _ = try meta.parser.parse(["createFISA","--help"])
                 self.fail("Should have raised parse error")

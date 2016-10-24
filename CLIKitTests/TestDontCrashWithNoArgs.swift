@@ -34,7 +34,7 @@ private final class DontCrashWithNoArgs : CLIKit.EasyCommand {
 class DontCrashWithNoArgsTests  {
     class DontCrashWithNoArgsTest: CarolineTest {
         func test() {
-            let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
+            let metacommand = MetaCommand(name: "whatever", version: "0.0", subcommands: [DontCrashWithNoArgs()])
             do {
                 let _ = try metacommand.parse([])
             }
@@ -44,7 +44,7 @@ class DontCrashWithNoArgsTests  {
     
     class TestUsage: CarolineTest {
         func test() {
-            let metacommand = MetaCommand(name: "whatever", subcommands: [DontCrashWithNoArgs()])
+            let metacommand = MetaCommand(name: "whatever", version: "0.0", subcommands: [DontCrashWithNoArgs()])
             let _ = metacommand.longHelp
         }
     }

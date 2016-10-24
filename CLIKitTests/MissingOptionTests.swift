@@ -32,7 +32,7 @@ private final class MissingOptionCmd : CLIKit.EasyCommand {
 
 class MissingOptionTests : CarolineTest {
     func test() {
-        let metacommand = MetaCommand(name: "whatever", subcommands: [MissingOptionCmd()])
+        let metacommand = MetaCommand(name: "whatever", version: "0.0", subcommands: [MissingOptionCmd()])
         do {
             let _ = try metacommand.parse(["createIdentity","--whatever","something"])
         }
