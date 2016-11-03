@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 This project does not follow semver.
 
-# 2.0 - 2016-10-22
+# 2.0 - 2016-11-03
 
 * Update to Swift 3
 * Now distributed as a static library, which makes more sense for command-line tools
