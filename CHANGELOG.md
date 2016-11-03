@@ -10,6 +10,7 @@ This project does not follow semver.
 * Builds with Anarchy Tools.  http://anarchytools.org
 * We have a cute logo
 * CLIKit now has docs at http://clikit-docs.sealedabstract.com
+* Integration with pianissimo for legal text registration
 
 # 1.2.1 - 2015-12-07
 
